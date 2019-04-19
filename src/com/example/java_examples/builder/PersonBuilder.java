@@ -1,7 +1,7 @@
-package com.example.testapp.builder;
+package com.example.java_examples.builder;
 
-import com.example.testapp.entities.Address;
-import com.example.testapp.entities.Person;
+import com.example.java_examples.entities.Address;
+import com.example.java_examples.entities.Person;
 
 public class PersonBuilder {
 

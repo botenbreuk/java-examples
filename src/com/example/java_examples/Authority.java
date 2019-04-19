@@ -1,4 +1,4 @@
-package com.example.testapp;
+package com.example.java_examples;
 
 public enum Authority {
 

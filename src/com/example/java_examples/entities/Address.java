@@ -1,4 +1,4 @@
-package com.example.testapp.entities;
+package com.example.java_examples.entities;
 
 public class Address {
 

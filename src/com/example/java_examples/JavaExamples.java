@@ -1,17 +1,20 @@
-package com.example.testapp;
+package com.example.java_examples;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.UUID;
 
-import com.example.testapp.enums.TestEnum;
-import com.example.testapp.overerving.TestOverErving;
-import com.example.testapp.suppliers.SupplierExample;
-import com.example.testapp.time.ClockExample;
-import com.example.testapp.time.DateExample;
+import com.example.java_examples.enums.TestEnum;
+import com.example.java_examples.inheritance.TestOverErving;
+import com.example.java_examples.suppliers.SupplierExample;
+import com.example.java_examples.time.ClockExample;
+import com.example.java_examples.time.DateExample;
 
-public class TestApp {
+public class JavaExamples {
 
 	public static void main(String[] args) {
 
@@ -39,19 +42,11 @@ public class TestApp {
 		LocalDateTime dateTime = LocalDateTime.of(2018, 11, 02, 12, 32, 22, 300);
 		System.out.println(dateTime.toLocalTime().toString());
 
-//		int integer = 0;
-//		while (integer < 100) {
-//			System.out.println("Vul getal in");
-//			Scanner keyboard = new Scanner(System.in);
-//			integer += keyboard.nextInt();
-//			System.out.println("Total is: " + integer);
-//		}
+//		System.out.println("<!-- Count user input util it reaches maximum -->");
+//		countTillNumber(100);
 
 		System.out.println("<!-- Unique id generator -->");
-		System.out.println(UUID.randomUUID().toString());
-		System.out.println(UUID.randomUUID().toString());
-		System.out.println(UUID.randomUUID().toString());
-		System.out.println(UUID.randomUUID().toString());
+		generateUID(4);
 
 		System.out.println("<!-- Enum test -->");
 		Test test = Test.TEST1;
@@ -66,21 +61,41 @@ public class TestApp {
 		TestOverErving testOverErving = new TestOverErving();
 		testOverErving.testClasses();
 
-//		List<String> strings = new ArrayList<>();
-//		Scanner keyboard = new Scanner(System.in);
-//		int i = 1;
-//		while (keyboard.hasNextLine()) {
-//			if (keyboard.nextLine().isEmpty()) break;
-//			strings.add(i + ": " + keyboard.nextLine());
-//			i++;
-//		}
-//		System.out.println(strings.size());
-//		System.out.println("Normal list");
-//		strings.forEach(System.out::println);
-//
-//		System.out.println("Shuffled list");
-//		Collections.shuffle(strings);
-//		strings.forEach(System.out::println);
+//		shuffleSporifyList();
+	}
+
+	private static void countTillNumber(int number) {
+		int total = 0;
+		while (total < number) {
+			System.out.println("Vul getal in");
+			Scanner keyboard = new Scanner(System.in);
+			total += keyboard.nextInt();
+			System.out.println("Total is: " + total);
+		}
+	}
+
+	private static void generateUID(int number) {
+		for(int i = 0; i < number; i++) {
+			System.out.println(UUID.randomUUID().toString());
+		}
+	}
+
+	private static void shuffleSporifyList() {
+		List<String> strings = new ArrayList<>();
+		Scanner keyboard = new Scanner(System.in);
+		int i = 1;
+		while (keyboard.hasNextLine()) {
+			if (keyboard.nextLine().isEmpty()) break;
+			strings.add(i + ": " + keyboard.nextLine());
+			i++;
+		}
+		System.out.println(strings.size());
+		System.out.println("Normal list");
+		strings.forEach(System.out::println);
+
+		System.out.println("Shuffled list");
+		Collections.shuffle(strings);
+		strings.forEach(System.out::println);
 	}
 
 	private static void returnTest(Test test) {

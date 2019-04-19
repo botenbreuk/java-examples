@@ -1,4 +1,4 @@
-package com.example.testapp.enums;
+package com.example.java_examples.enums;
 
 public enum TestEnum {
     HELLO,

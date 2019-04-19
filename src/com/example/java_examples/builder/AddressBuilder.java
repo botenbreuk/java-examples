@@ -1,6 +1,6 @@
-package com.example.testapp.builder;
+package com.example.java_examples.builder;
 
-import com.example.testapp.entities.Address;
+import com.example.java_examples.entities.Address;
 
 public class AddressBuilder {
 

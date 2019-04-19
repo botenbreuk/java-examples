@@ -1,4 +1,4 @@
-package com.example.testapp.suppliers;
+package com.example.java_examples.suppliers;
 
 import java.util.Arrays;
 import java.util.List;

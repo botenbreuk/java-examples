@@ -1,4 +1,4 @@
-package com.example.testapp.overerving;
+package com.example.java_examples.inheritance;
 
 public class TestOverErving {
 
