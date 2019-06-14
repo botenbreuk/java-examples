@@ -1,7 +1,6 @@
 package com.example.java_examples;
 
 import static com.example.java_examples.Authority.CLIENTS_MANAGE;
-import static com.example.java_examples.Authority.SERVERS_MANAGE;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.UUID;
 
 import com.example.java_examples.enums.TestEnum;
@@ -17,7 +15,6 @@ import com.example.java_examples.inheritance.TestOverErving;
 import com.example.java_examples.suppliers.SupplierExample;
 import com.example.java_examples.time.ClockExample;
 import com.example.java_examples.time.DateExample;
-import com.google.common.collect.Sets;
 
 public class JavaExamples {
 
@@ -67,11 +64,6 @@ public class JavaExamples {
 		testOverErving.testClasses();
 
 //		shuffleSporifyList();
-
-		Set<Authority> authoritiesList1 = Sets.newHashSet(CLIENTS_MANAGE);
-		Set<Authority> authoritiesList2 = Sets.newHashSet(CLIENTS_MANAGE, SERVERS_MANAGE);
-
-		System.out.println(!Collections.disjoint(authoritiesList1, authoritiesList2));
 	}
 
 	private static void countTillNumber(int number) {
