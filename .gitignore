@@ -25,6 +25,7 @@ hs_err_pid*
 # IDE files
 /.idea
 *.iml
+/target
 
 # Misc
 .DS_Store
