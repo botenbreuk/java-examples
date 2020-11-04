@@ -64,9 +64,11 @@ public class JavaExamples {
 		TestOverErving testOverErving = new TestOverErving();
 		testOverErving.testClasses();
 
-//		shuffleSporifyList();
+		//		shuffleSporifyList();
 
 		start();
+
+		//		Looping.loopie(0, 100000, System.out::println);
 	}
 
 	static String n = "";

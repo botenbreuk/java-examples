@@ -15,6 +15,21 @@ public class LocalDateTimeExample {
         this.now = localDateTime;
     }
 
+    public String format(LocalDateTime time, String format) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(format);
+        return time.format(dtf);
+    }
+
+    public LocalDateTime parse(String time, String format) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(format);
+        try {
+            return LocalDateTime.parse(time, dtf);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
     public String getOrdinaryYearFormat() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
         return this.now.format(dtf);
