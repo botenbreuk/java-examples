@@ -8,41 +8,48 @@
     <artifactId>java_examples</artifactId>
     <version>1.0.0</version>
 
+    <properties>
+        <junit.version>5.6.2</junit.version>
+        <google-guava.version>29.0-jre</google-guava.version>
+        <commons-collectiosn.version>4.4</commons-collectiosn.version>
+        <junit-runner.version>1.6.2</junit-runner.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>23.0</version>
+            <version>${google-guava.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
-            <version>4.4</version>
+            <version>${commons-collectiosn.version}</version>
         </dependency>
 
         <!-- Testing libraries -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.4.2</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>5.4.2</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.4.2</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-runner</artifactId>
-            <version>1.4.2</version>
+            <version>${junit-runner.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -53,15 +60,29 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.1</version>
+                <version>2.22.2</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>6.0.2</version>
+                <configuration>
+                    <failBuildOnAnyVulnerability>true</failBuildOnAnyVulnerability>
+                    <skipProvidedScope>true</skipProvidedScope>
+                    <skipTestScope>true</skipTestScope>
+                    <skipRuntimeScope>true</skipRuntimeScope>
+                    <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <suppressionFile>owasp-suppressions.xml</suppressionFile>
+                </configuration>
             </plugin>
         </plugins>
     </build>
