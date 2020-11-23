@@ -22,4 +22,6 @@ jobs:
         java-version: 11
     - name: Build with Maven
       run: mvn clean verify
+    - name: OWASP check
+      run: mvn dependency-check:check
     - uses: codecov/codecov-action@v1.0.15
