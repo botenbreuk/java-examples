@@ -10,17 +10,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import com.example.java_examples.enums.TestEnum;
 import com.example.java_examples.inheritance.TestOverErving;
+import com.example.java_examples.pokemon.pokemon_kinds.Charmander;
+import com.example.java_examples.string.CodeGenerator;
 import com.example.java_examples.suppliers.SupplierExample;
 import com.example.java_examples.time.ClockExample;
 import com.example.java_examples.time.DateExample;
 
 public class JavaExamples {
 
-	public static void main(String[] args) throws IOException {
-
+	public static void main(String[] args) {
+		String numberConcat = 1 + 1 + 2 + "6";
+		System.out.println(numberConcat);
 		SupplierExample supplierExample = new SupplierExample();
 
 		List<String> stringList = supplierExample.getDocumentsReference().getDocumentNames().get();
@@ -68,7 +72,15 @@ public class JavaExamples {
 
 		start();
 
+		System.out.println(Charmander.class.getName());
+		System.out.println(Charmander.class.getSimpleName());
+
 		//		Looping.loopie(0, 100000, System.out::println);
+
+		System.out.println(TimeUnit.HOURS.toMillis(1));
+		System.out.println(new CodeGenerator().getCode());
+
+
 	}
 
 	static String n = "";
