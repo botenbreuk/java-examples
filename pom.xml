@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -12,6 +12,7 @@
         <junit.version>5.6.2</junit.version>
         <google-guava.version>29.0-jre</google-guava.version>
         <commons-collectiosn.version>4.4</commons-collectiosn.version>
+        <lombok.version>1.18.22</lombok.version>
         <junit-runner.version>1.6.2</junit-runner.version>
     </properties>
 
@@ -25,6 +26,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collectiosn.version}</version>
+        </dependency>
+        <dependency>
+		<groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
 
         <!-- Testing libraries -->

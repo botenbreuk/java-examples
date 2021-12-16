@@ -2,7 +2,6 @@ package com.example.java_examples;
 
 import static com.example.java_examples.Authority.CLIENTS_MANAGE;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -89,23 +88,16 @@ public class JavaExamples {
 
 		@Override
 		public void run() {
-
 			while (!n.equals(null)) {
-
 				try {
 					Thread.sleep(1000);
-
 					if (n.trim().equals("1"))
 						System.out.println("Learning..");
-
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-
 			}
-
 		}
-
 	}
 
 	static class Starter extends Thread {
