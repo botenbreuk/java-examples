@@ -2,6 +2,9 @@ package nl.rdb.java_examples.inheritance;
 
 import java.lang.invoke.MethodHandles;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class TestParent implements TestInterface {
 
     @Override
@@ -12,14 +15,14 @@ public class TestParent implements TestInterface {
     }
 
     protected void world() {
-        System.out.println("world");
+        log.info("world");
     }
 
     private void hello() {
-        System.out.println("Hello");
+        log.info("Hello");
     }
 
     private void className() {
-        System.out.println(MethodHandles.lookup().lookupClass().getComponentType());
+        log.info("{}", MethodHandles.lookup().lookupClass().getComponentType());
     }
 }

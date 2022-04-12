@@ -2,11 +2,14 @@ package nl.rdb.java_examples.multi_threaded_counter;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class MultiThreadedCounter implements Runnable {
 
     private Thread worker;
     private final AtomicBoolean running = new AtomicBoolean(false);
-    private int interval;
+    private final int interval;
 
     public MultiThreadedCounter(int sleepInterval) {
         interval = sleepInterval;
@@ -32,11 +35,10 @@ public class MultiThreadedCounter implements Runnable {
         while (running.get()) {
             try {
                 Thread.sleep(interval);
-                System.out.println("hello");
-            } catch (InterruptedException e){
+                log.info("hello");
+            } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                System.out.println(
-                        "Thread was interrupted, Failed to complete operation");
+                log.info("Thread was interrupted, Failed to complete operation");
             }
             // do something here
         }

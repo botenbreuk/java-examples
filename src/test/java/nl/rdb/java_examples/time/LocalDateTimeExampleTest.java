@@ -9,10 +9,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+@Slf4j
 class LocalDateTimeExampleTest {
 
     @Test
@@ -39,11 +42,11 @@ class LocalDateTimeExampleTest {
 
     @Test
     void test() {
-        System.out.println(MethodHandles.lookup().lookupClass());
+        log.info("{}", MethodHandles.lookup().lookupClass());
     }
 
     @Nested
-    class LocalDateValidation {
+    class LocalDateValidationTest {
 
         LocalDate startCheck;
         LocalDate endCheck;
@@ -108,7 +111,7 @@ class LocalDateTimeExampleTest {
     }
 
     @Nested
-    class ZGLocalDateValidation {
+    class ZGLocalDateValidationTest {
 
         LocalDate zgStartCheck;
         LocalDate zgEndCheck;
@@ -195,7 +198,7 @@ class LocalDateTimeExampleTest {
     }
 
     @Nested
-    class ZGUpdatedLocalDateValidation {
+    class ZGUpdatedLocalDateValidationTest {
 
         LocalDate zgStartCheck;
         LocalDate zgEndCheck;

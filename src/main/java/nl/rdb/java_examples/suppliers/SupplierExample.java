@@ -2,11 +2,11 @@ package nl.rdb.java_examples.suppliers;
 
 import java.util.List;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class SupplierExample {
-
-    public SupplierExample() { }
 
     /*
      * This methods tests if documentsReference.get() is called before the get() is called from
@@ -15,12 +15,12 @@ public class SupplierExample {
     public SupplierContainer getDocumentsReference() {
         DocumentService documentService = new DocumentService();
 
-        Supplier<List<Document>> documentsReference = () -> documentService.getDocuments();
+        Supplier<List<Document>> documentsReference = documentService::getDocuments;
 
-        System.out.printf("SupplierExample -> execute documentsReference \n");
+        log.info("SupplierExample -> execute documentsReference \n");
         Supplier<List<String>> newList = () -> documentsReference.get().stream()
                 .map(Document::getNaam)
-                .collect(Collectors.toList());
+                .toList();
 
         return new SupplierContainer(newList);
     }

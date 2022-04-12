@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.rdb.java_examples.enums.TestEnum;
 import nl.rdb.java_examples.inheritance.TestOverErving;
 import nl.rdb.java_examples.pokemon.pokemon_kinds.Charmander;
@@ -17,158 +18,154 @@ import nl.rdb.java_examples.suppliers.SupplierExample;
 import nl.rdb.java_examples.time.ClockExample;
 import nl.rdb.java_examples.time.DateExample;
 
+@Slf4j
 public class JavaExamples {
 
-	public static void main(String[] args) {
-		String numberConcat = 1 + 1 + 2 + "6";
-		System.out.println(numberConcat);
-		SupplierExample supplierExample = new SupplierExample();
+    static String n = "";
 
-		List<String> stringList = supplierExample.getDocumentsReference().getDocumentNames().get();
-		System.out.println("Stringlist size: " + stringList.size() + "\n");
+    public static void main(String[] args) {
+        String numberConcat = 1 + 1 + 2 + "6";
+        log.info(numberConcat);
+        SupplierExample supplierExample = new SupplierExample();
 
-		DateExample dateExample = new DateExample();
-		System.out.println(dateExample.addDays(LocalDate.of(2017, 11, 2), 3));
-		System.out.println(dateExample.formatCurrentDate("yyyyMMdd"));
+        List<String> stringList = supplierExample.getDocumentsReference().getDocumentNames().get();
+        log.info("Stringlist size: " + stringList.size() + "\n");
 
-		String str = "42 B.V.";
-		System.out.println(str.replaceAll("[,. ]", "").toLowerCase());
-		String str2 = "42bv";
-		System.out.println(str2.replaceAll("[,. ]", "").toLowerCase());
+        DateExample dateExample = new DateExample();
+        log.info("{}", dateExample.addDays(LocalDate.of(2017, 11, 2), 3));
+        log.info(dateExample.formatCurrentDate("yyyyMMdd"));
 
-		System.out.println(TestEnum.HELLO.name());
-		System.out.println(Authority.CLIENTS_MANAGE);
+        String str = "42 B.V.";
+        log.info(str.replaceAll("[,. ]", "").toLowerCase());
+        String str2 = "42bv";
+        log.info(str2.replaceAll("[,. ]", "").toLowerCase());
 
-		ClockExample clockExample = new ClockExample();
-		System.out.println(clockExample.showRealTime());
-		System.out.println(clockExample.showTime());
+        log.info(TestEnum.HELLO.name());
+        log.info("{}", Authority.CLIENTS_MANAGE);
 
-		LocalDateTime dateTime = LocalDateTime.of(2018, 11, 02, 12, 32, 22, 300);
-		System.out.println(dateTime.toLocalTime().toString());
+        ClockExample clockExample = new ClockExample();
+        log.info("{}", clockExample.showRealTime());
+        log.info("{}", clockExample.showTime());
 
-//		System.out.println("<!-- Count user input util it reaches maximum -->");
-//		countTillNumber(100);
+        LocalDateTime dateTime = LocalDateTime.of(2018, 11, 02, 12, 32, 22, 300);
+        log.info(dateTime.toLocalTime().toString());
 
-		System.out.println("<!-- Unique id generator -->");
-		generateUID(4);
+        //		log.info("<!-- Count user input util it reaches maximum -->");
+        //		countTillNumber(100);
 
-		System.out.println("<!-- Enum test -->");
-		Test test = Test.TEST1;
-		Test test2 = Test.TEST2;
-		Test test3 = Test.TEST3;
+        log.info("<!-- Unique id generator -->");
+        generateUID(4);
 
-		returnTest(test);
-		returnTest(test2);
-		returnTest(test3);
+        log.info("<!-- Enum test -->");
+        Test test = Test.TEST1;
+        Test test2 = Test.TEST2;
+        Test test3 = Test.TEST3;
 
-		System.out.println("<!-- Overerving test -->");
-		TestOverErving testOverErving = new TestOverErving();
-		testOverErving.testClasses();
+        returnTest(test);
+        returnTest(test2);
+        returnTest(test3);
 
-		//		shuffleSporifyList();
+        log.info("<!-- Overerving test -->");
+        TestOverErving testOverErving = new TestOverErving();
+        testOverErving.testClasses();
 
-		start();
+        //		shuffleSporifyList();
 
-		System.out.println(Charmander.class.getName());
-		System.out.println(Charmander.class.getSimpleName());
+        start();
 
-		//		Looping.loopie(0, 100000, System.out::println);
+        log.info(Charmander.class.getName());
+        log.info(Charmander.class.getSimpleName());
 
-		System.out.println(TimeUnit.HOURS.toMillis(1));
-		System.out.println(new CodeGenerator().getCode());
+        //		Looping.loopie(0, 100000, log::info);
 
+        log.info("{}", TimeUnit.HOURS.toMillis(1));
+        log.info(new CodeGenerator().getCode());
 
-	}
+    }
 
-	static String n = "";
+    private static void start() {
 
-	static class Printer extends Thread {
+        new Starter().start();
+        new Printer().start();
 
-		@Override
-		public void run() {
-			while (!n.equals(null)) {
-				try {
-					Thread.sleep(1000);
-					if (n.trim().equals("1"))
-						System.out.println("Learning..");
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+    }
 
-	static class Starter extends Thread {
+    private static void countTillNumber(int number) {
+        int total = 0;
+        while (total < number) {
+            log.info("Vul getal in");
+            Scanner keyboard = new Scanner(System.in);
+            total += keyboard.nextInt();
+            log.info("Total is: " + total);
+        }
+    }
 
-		@Override
-		public void run() {
+    private static void generateUID(int number) {
+        for (int i = 0; i < number; i++) {
+            log.info(UUID.randomUUID().toString());
+        }
+    }
 
-			Scanner reader = new Scanner(System.in);
+    private static void shuffleSporifyList() {
+        List<String> strings = new ArrayList<>();
+        Scanner keyboard = new Scanner(System.in);
+        int i = 1;
+        while (keyboard.hasNextLine()) {
+            if (keyboard.nextLine().isEmpty())
+                break;
+            strings.add(i + ": " + keyboard.nextLine());
+            i++;
+        }
+        log.info("{}", strings.size());
+        log.info("Normal list");
+        strings.forEach(log::info);
 
-			while (true) {
-				System.out.println("1 = ON \n 0 = OFF");
-				n = reader.nextLine();
-			}
-		}
+        log.info("Shuffled list");
+        Collections.shuffle(strings);
+        strings.forEach(log::info);
+    }
 
-	}
+    private static void returnTest(Test test) {
+        switch (test) {
+            case TEST1, TEST2 -> log.info("This is 1 or 2");
+            case TEST3 -> log.info("This is 3");
+        }
+    }
 
-	private static void start() {
+    public enum Test {
+        TEST1,
+        TEST2,
+        TEST3
+    }
 
-		new Starter().start();
-		new Printer().start();
+    static class Printer extends Thread {
 
-	}
+        @Override
+        public void run() {
+            while (!n.equals(null)) {
+                try {
+                    Thread.sleep(1000);
+                    if (n.trim().equals("1"))
+                        log.info("Learning..");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
-	private static void countTillNumber(int number) {
-		int total = 0;
-		while (total < number) {
-			System.out.println("Vul getal in");
-			Scanner keyboard = new Scanner(System.in);
-			total += keyboard.nextInt();
-			System.out.println("Total is: " + total);
-		}
-	}
+    static class Starter extends Thread {
 
-	private static void generateUID(int number) {
-		for(int i = 0; i < number; i++) {
-			System.out.println(UUID.randomUUID().toString());
-		}
-	}
+        @Override
+        public void run() {
 
-	private static void shuffleSporifyList() {
-		List<String> strings = new ArrayList<>();
-		Scanner keyboard = new Scanner(System.in);
-		int i = 1;
-		while (keyboard.hasNextLine()) {
-			if (keyboard.nextLine().isEmpty()) break;
-			strings.add(i + ": " + keyboard.nextLine());
-			i++;
-		}
-		System.out.println(strings.size());
-		System.out.println("Normal list");
-		strings.forEach(System.out::println);
+            Scanner reader = new Scanner(System.in);
 
-		System.out.println("Shuffled list");
-		Collections.shuffle(strings);
-		strings.forEach(System.out::println);
-	}
-
-	private static void returnTest(Test test) {
-		switch(test) {
-			case TEST1:
-			case TEST2:
-				System.out.println("This is 1 or 2");
-				break;
-			case TEST3:
-				System.out.println("This is 3");
-				break;
-		}
-	}
-
-	public enum Test {
-		TEST1,
-		TEST2,
-		TEST3
-	}
+            while (true) {
+                log.info("0 = OFF");
+                log.info("1 = ON");
+                n = reader.nextLine();
+            }
+        }
+    }
 }
