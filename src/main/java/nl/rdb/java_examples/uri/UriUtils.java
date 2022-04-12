@@ -3,8 +3,10 @@ package nl.rdb.java_examples.uri;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,45 +18,52 @@ public class UriUtils {
     private UriUtils() {}
 
     public static String encode(String url) {
+        return encode(url, StandardCharsets.UTF_8);
+    }
+
+    public static String encode(String url, Charset charset) {
         String[] parts = url.split("://");
         String protocol = parts[0];
-        String domain = parts[1].split("/")[0];
+        String[] domainAndPaths = parts[1].split("/");
+        String domain = domainAndPaths[0];
 
-        List<String> strs = new ArrayList<>(List.of(parts[1].split("/")));
+        List<String> pathParts = new ArrayList<>(Arrays.asList(domainAndPaths));
 
-        strs.remove(0);
+        // Remove the first, because this is the domain
+        pathParts.remove(0);
         List<String> params = new ArrayList<>();
-        if (!strs.isEmpty()) {
-            String test;
 
-            if (strs.size() > 1) {
-                test = strs.remove(strs.size() - 1);
+        // If there are paths
+        if (!pathParts.isEmpty()) {
+            String pathWithParams;
+            int pathPartsSize = pathParts.size();
+
+            if (pathPartsSize > 1) {
+                pathWithParams = pathParts.remove(pathPartsSize - 1);
             } else {
-                test = strs.remove(0);
+                pathWithParams = pathParts.remove(0);
             }
 
-            if (!test.isEmpty()) {
-                String[] queryParams = test.split("\\?");
-                if (queryParams.length > 1) {
-                    params = new ArrayList<>(List.of(queryParams[1].split("&")));
+            if (!pathWithParams.isEmpty()) {
+                List<String> queryParams = Arrays.asList(pathWithParams.split("\\?"));
+                if (queryParams.size() > 1) {
+                    params = Arrays.asList(queryParams.get(1).split("&"));
                 }
-                strs.add(queryParams[0]);
+                pathParts.add(queryParams.get(0));
             }
 
-            strs.forEach(str -> URLEncoder.encode(str, StandardCharsets.UTF_8));
-            params.forEach(str -> URLEncoder.encode(str, StandardCharsets.UTF_8));
-
+            pathParts.forEach(str -> URLEncoder.encode(str, charset));
+            params.forEach(str -> URLEncoder.encode(str, charset));
         }
 
-        URI uri = null;
         try {
-            String paths = strs.stream().collect(Collectors.joining("/", "/", ""));
-            String query = params.stream().collect(Collectors.joining("&", "", ""));
-            uri = new URI(protocol, domain, strs.isEmpty() ? null : paths, params.isEmpty() ? null : query, null);
-        } catch (URISyntaxException e) {
-            log.info("Something went wrong with ur: {}", url);
-        }
+            String paths = !pathParts.isEmpty() ? pathParts.stream().collect(Collectors.joining("/", "/", "")) : null;
+            String query = !params.isEmpty() ? params.stream().collect(Collectors.joining("&", "", "")) : null;
 
-        return uri == null ? "" : uri.toASCIIString();
+            return new URI(protocol, domain, paths, query, null).toString();
+        } catch (URISyntaxException e) {
+            log.error("Something went wrong with ur: {}", url);
+            return url;
+        }
     }
 }
