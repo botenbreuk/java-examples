@@ -8,11 +8,14 @@ public class AddressBuilder {
         return new AddressBuildCommand();
     }
 
-    public class AddressBuildCommand {
+    public static class AddressBuildCommand {
 
-        private Address address = new Address();
+        private final Address address;
 
-        public AddressBuildCommand() {}
+        public AddressBuildCommand() {
+            this.address = new Address();
+        }
+
         public AddressBuildCommand(Address address) {
             this.address = address;
         }

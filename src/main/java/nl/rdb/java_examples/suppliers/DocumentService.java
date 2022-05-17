@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DocumentService {
 
     public List<Document> getDocuments() {
-        log.info("Execution DocumentService::getDocuments \n");
+        log.info("Execution DocumentService::getDocuments");
         return Arrays.asList(new Document("Doc1"), new Document("Doc2"));
     }
 }

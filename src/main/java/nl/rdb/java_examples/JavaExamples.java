@@ -29,7 +29,7 @@ public class JavaExamples {
         SupplierExample supplierExample = new SupplierExample();
 
         List<String> stringList = supplierExample.getDocumentsReference().getDocumentNames().get();
-        log.info("Stringlist size: " + stringList.size() + "\n");
+        log.info("Stringlist size: " + stringList.size());
 
         DateExample dateExample = new DateExample();
         log.info("{}", dateExample.addDays(LocalDate.of(2017, 11, 2), 3));

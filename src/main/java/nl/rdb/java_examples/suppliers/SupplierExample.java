@@ -17,7 +17,7 @@ public class SupplierExample {
 
         Supplier<List<Document>> documentsReference = documentService::getDocuments;
 
-        log.info("SupplierExample -> execute documentsReference \n");
+        log.info("SupplierExample -> execute documentsReference");
         Supplier<List<String>> newList = () -> documentsReference.get().stream()
                 .map(Document::getNaam)
                 .toList();
