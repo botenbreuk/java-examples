@@ -40,5 +40,4 @@ class ObjectsTest {
             private int age;
         }
     }
-
 }
