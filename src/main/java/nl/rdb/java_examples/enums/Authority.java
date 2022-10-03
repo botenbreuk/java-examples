@@ -1,4 +1,4 @@
-package nl.rdb.java_examples;
+package nl.rdb.java_examples.enums;
 
 public enum Authority {
 

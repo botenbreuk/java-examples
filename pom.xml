@@ -11,17 +11,20 @@
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
 
-        <junit.version>5.8.2</junit.version>
+        <junit.version>5.9.0</junit.version>
         <google-guava.version>31.1-jre</google-guava.version>
         <commons-collectiosn.version>4.4</commons-collectiosn.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <lombok.version>1.18.24</lombok.version>
         <gson.version>2.9.0</gson.version>
-        <junit-runner.version>1.8.2</junit-runner.version>
+        <reflections.version>0.10.2</reflections.version>
 
-        <log4j.version>2.17.2</log4j.version>
-        <logback.version>1.2.11</logback.version>
-        <log4j-over-slf4j.version>1.7.36</log4j-over-slf4j.version>
+        <log4j.version>2.19.0</log4j.version>
+        <logback.version>1.4.1</logback.version>
+        <log4j-over-slf4j.version>2.0.3</log4j-over-slf4j.version>
+        <slf4j-api.version>2.0.3</slf4j-api.version>
+
+        <junit-runner.version>1.9.0</junit-runner.version>
     </properties>
 
     <dependencies>
@@ -51,6 +54,11 @@
             <artifactId>gson</artifactId>
             <version>${gson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>${reflections.version}</version>
+        </dependency>
 
         <!-- Logging -->
         <dependency>
@@ -72,6 +80,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
             <version>${log4j-over-slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
         </dependency>
 
         <!-- Testing libraries -->

@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import lombok.extern.slf4j.Slf4j;
+import nl.rdb.java_examples.scanner.Example;
 
 @Slf4j
 public class SupplierExample {
 
     /*
-     * This methods tests if documentsReference.get() is called before the get() is called from
+     * These methods test if documentsReference.get() is called before the get() is called from
      * the SupplierContainer::getDocumentNames
      */
     public SupplierContainer getDocumentsReference() {
@@ -23,5 +24,13 @@ public class SupplierExample {
                 .toList();
 
         return new SupplierContainer(newList);
+    }
+
+    @Example
+    public void supplierExample() {
+        SupplierExample supplierExample = new SupplierExample();
+
+        List<String> stringList = supplierExample.getDocumentsReference().documentNames().get();
+        log.info("Stringlist size: " + stringList.size());
     }
 }

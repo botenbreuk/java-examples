@@ -1,16 +1,16 @@
 package nl.rdb.java_examples.list;
 
-import static nl.rdb.java_examples.Authority.CLIENTS_MANAGE;
-import static nl.rdb.java_examples.Authority.EMAIL_SEND;
-import static nl.rdb.java_examples.Authority.SERVERS_MANAGE;
-import static nl.rdb.java_examples.Authority.SERVERS_READ;
+import static nl.rdb.java_examples.enums.Authority.CLIENTS_MANAGE;
+import static nl.rdb.java_examples.enums.Authority.EMAIL_SEND;
+import static nl.rdb.java_examples.enums.Authority.SERVERS_MANAGE;
+import static nl.rdb.java_examples.enums.Authority.SERVERS_READ;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 import java.util.Set;
 
-import nl.rdb.java_examples.Authority;
+import nl.rdb.java_examples.enums.Authority;
 
 import org.junit.jupiter.api.Test;
 

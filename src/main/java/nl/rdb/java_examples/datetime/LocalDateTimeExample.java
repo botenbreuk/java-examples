@@ -1,4 +1,4 @@
-package nl.rdb.java_examples.time;
+package nl.rdb.java_examples.datetime;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
