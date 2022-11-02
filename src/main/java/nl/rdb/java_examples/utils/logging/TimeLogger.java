@@ -1,5 +1,6 @@
 package nl.rdb.java_examples.utils.logging;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -15,6 +16,8 @@ import org.apache.commons.lang3.time.StopWatch;
 @Slf4j
 public class TimeLogger {
 
+    private static final String METHOD_STRING = "Method: \"%s\". Message: %s";
+
     private TimeLogger() {throw new IllegalStateException("Utility class");}
 
     public static void logTimeFinish(String name, String message, Runnable function) {
@@ -24,12 +27,22 @@ public class TimeLogger {
         log.info("{} > {} took {}ms", name, message, stopWatch.getTime());
     }
 
+    public static void logTimeFinish(String message, Runnable function) {
+        StackTraceRecord traceRecord = new StackTraceRecord();
+        logTimeFinish(traceRecord.getShowrtClasse(), METHOD_STRING.formatted(traceRecord.getClassMethod(), message), function);
+    }
+
     public static <T> T logTimeFinish(String name, String message, Supplier<T> function) {
         StopWatch stopWatch = StopWatch.createStarted();
         T result = function.get();
         stopWatch.stop();
         log.info("{} > {} took {}ms", name, message, stopWatch.getTime());
         return result;
+    }
+
+    public static <T> T logTimeFinish(String message, Supplier<T> function) {
+        StackTraceRecord traceRecord = new StackTraceRecord();
+        return logTimeFinish(traceRecord.getShowrtClasse(), METHOD_STRING.formatted(traceRecord.getClassMethod(), message), function);
     }
 
     public static <T> T logTimeStartFinish(String name, String message, Supplier<T> function) {
@@ -41,12 +54,22 @@ public class TimeLogger {
         return result;
     }
 
+    public static <T> T logTimeStartFinish(String message, Supplier<T> function) {
+        StackTraceRecord traceRecord = new StackTraceRecord();
+        return logTimeStartFinish(traceRecord.getShowrtClasse(), METHOD_STRING.formatted(traceRecord.getClassMethod(), message), function);
+    }
+
     public static void logTimeStartFinish(String name, String message, Runnable function) {
         StopWatch stopWatch = StopWatch.createStarted();
         log.info("{} > Started: {}", name, message);
         function.run();
         stopWatch.stop();
         log.info("{} > Finished: {} took {}ms", name, message, stopWatch.getTime());
+    }
+
+    public static void logTimeStartFinish(String message, Runnable function) {
+        StackTraceRecord traceRecord = new StackTraceRecord();
+        logTimeStartFinish(traceRecord.getShowrtClasse(), METHOD_STRING.formatted(traceRecord.getClassMethod(), message), function);
     }
 
     public static <T> void logTimeStartFinish(String name, String message, List<List<T>> partitions, Consumer<List<T>> function) {
@@ -61,9 +84,36 @@ public class TimeLogger {
         }
     }
 
+    public static <T> void logTimeStartFinish(String message, List<List<T>> partitions, Consumer<List<T>> function) {
+        StackTraceRecord traceRecord = new StackTraceRecord();
+        logTimeStartFinish(traceRecord.getShowrtClasse(), METHOD_STRING.formatted(traceRecord.getClassMethod(), message), partitions, function);
+    }
+
     public static void logStartFinish(String name, String message, Runnable function) {
         log.info("{} > Started: {}", name, message);
         function.run();
         log.info("{} > Finished: {}", name, message);
+    }
+
+    public static void logStartFinish(String message, Runnable function) {
+        StackTraceRecord traceRecord = new StackTraceRecord();
+        logStartFinish(traceRecord.getShowrtClasse(), METHOD_STRING.formatted(traceRecord.getClassMethod(), message), function);
+    }
+
+    private static final class StackTraceRecord {
+        private final String className;
+        private final String methodName;
+
+        private StackTraceRecord() {
+            StackTraceElement trace = Arrays.stream(new Throwable().getStackTrace()).limit(5).toList().get(2);
+            this.className = trace.getClassName();
+            this.methodName = trace.getMethodName();
+        }
+
+        public String getShowrtClasse() {return Arrays.stream(className.split("\\.")).reduce((first, second) -> second).orElse("");}
+
+        public String getClassMethod() {
+            return "%s.%s()".formatted(this.className, this.methodName);
+        }
     }
 }
