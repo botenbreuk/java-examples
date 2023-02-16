@@ -8,10 +8,5 @@ public class JavaExamples {
 
     public static void main(String[] args) {
         new ExampleScanner().executeExamples();
-
-        //        start();
-
-        //		Looping.loopie(0, 100000, log::info);
     }
-
 }

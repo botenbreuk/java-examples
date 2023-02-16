@@ -48,11 +48,9 @@ public class TimeLogger {
     }
 
     public static <T> T logTimeStartFinish(String name, String message, Supplier<T> function) {
-        StopWatch stopWatch = StopWatch.createStarted();
-        log.info("{} > Started: {}", name, message);
+        StopWatch stopWatch = startTime(name, message);
         T result = function.get();
-        stopWatch.stop();
-        log.info("{} > Finished: {} took {}ms", name, message, stopWatch.getTime());
+        stopTIme(stopWatch, name, message);
         return result;
     }
 
@@ -62,19 +60,15 @@ public class TimeLogger {
     }
 
     public static void logTimeStartFinish(String name, String message, Runnable function) {
-        StopWatch stopWatch = StopWatch.createStarted();
-        log.info("{} > Started: {}", name, message);
+        StopWatch stopWatch = startTime(name, message);
         function.run();
-        stopWatch.stop();
-        log.info("{} > Finished: {} took {}ms", name, message, stopWatch.getTime());
+        stopTIme(stopWatch, name, message);
     }
 
     public static <T> T logTimeStartFinishUn(String name, String message, T obj, UnaryOperator<T> function) {
-        StopWatch stopWatch = StopWatch.createStarted();
-        log.info("{} > Started: {}", name, message);
+        StopWatch stopWatch = startTime(name, message);
         T result = function.apply(obj);
-        stopWatch.stop();
-        log.info("{} > Finished: {} took {}ms", name, message, stopWatch.getTime());
+        stopTIme(stopWatch, name, message);
         return result;
     }
 
@@ -84,11 +78,9 @@ public class TimeLogger {
     }
 
     public static <T, R> R logTimeStartFinishFn(String name, String message, T obj, Function<T, R> function) {
-        StopWatch stopWatch = StopWatch.createStarted();
-        log.info("{} > Started: {}", name, message);
+        StopWatch stopWatch = startTime(name, message);
         R result = function.apply(obj);
-        stopWatch.stop();
-        log.info("{} > Finished: {} took {}ms", name, message, stopWatch.getTime());
+        stopTIme(stopWatch, name, message);
         return result;
     }
 
@@ -136,6 +128,16 @@ public class TimeLogger {
     public static void logStartFinish(String message, Runnable function) {
         CalledByClassMethod calledBy = new CalledByClassMethod();
         logStartFinish(calledBy.getShortClass(), calledBy.getClassMethod(message), function);
+    }
+
+    private static StopWatch startTime(String name, String message) {
+        log.info("{} > Started: {}", name, message);
+        return StopWatch.createStarted();
+    }
+
+    private static void stopTIme(StopWatch stopWatch, String name, String message) {
+        stopWatch.stop();
+        log.info("{} > Finished: {} took {}ms", name, message, stopWatch.getTime());
     }
 
     private static final class CalledByClassMethod {

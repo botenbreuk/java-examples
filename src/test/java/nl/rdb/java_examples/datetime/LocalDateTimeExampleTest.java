@@ -8,6 +8,7 @@ import java.lang.invoke.MethodHandles;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.Objects;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,6 +24,14 @@ class LocalDateTimeExampleTest {
         LocalDateTimeExample example = new LocalDateTimeExample(LocalDateTime.of(2019, Month.DECEMBER, 31, 8, 15, 0));
         assertEquals("2019-12-31 08:15:00", example.getOrdinaryYearFormat());
         assertEquals("2020-12-31 08:15:00", example.getWeekBasedYearFormat());
+    }
+
+    @Test
+    void testEquals() {
+        LocalDateTime dateTime1 = LocalDateTime.of(2022, 11, 1, 10, 0);
+        LocalDateTime dateTime2 = LocalDateTime.of(2022, 11, 1, 10, 0);
+        assertTrue(dateTime1.equals(dateTime2));
+        assertTrue(Objects.equals(dateTime1, dateTime2));
     }
 
     @Test

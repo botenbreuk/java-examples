@@ -4,11 +4,13 @@ import java.util.function.Consumer;
 
 public class Looping {
 
-    public static void loopie(int bla, int times, Consumer<Integer> function) {
-        if (bla != times) {
-            bla += 1;
-            function.accept(bla);
-            loopie(bla, times, function);
+    private Looping() {throw new IllegalStateException("Static class");}
+
+    public static void loopie(int start, int times, Consumer<Object> function) {
+        if (start >= times) {
+            start++;
+            function.accept(start);
+            loopie(start, times, function);
         }
     }
 }
