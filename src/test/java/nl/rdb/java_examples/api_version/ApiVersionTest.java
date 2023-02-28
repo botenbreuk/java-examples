@@ -63,12 +63,16 @@ class ApiVersionTest {
         List<ApiVersionConfig> versionConfigs = new ArrayList<>();
         versionConfigs.add(ApiVersionConfig.of("1.1.0", true));
         versionConfigs.add(ApiVersionConfig.of("1.0.0", true));
+        versionConfigs.add(ApiVersionConfig.of("0.1.0", true));
         versionConfigs.add(ApiVersionConfig.of("1.2.0", true));
+        versionConfigs.add(ApiVersionConfig.of("4", true));
         versionConfigs.add(ApiVersionConfig.of("1.1.1", true));
+        versionConfigs.add(ApiVersionConfig.of("4.1", true));
+        versionConfigs.add(ApiVersionConfig.of("3.1.1", true));
 
         versionConfigs = versionConfigs.stream().sorted(new ApiVersionComparator().reversed()).toList();
 
-        assertEquals("1.2.0", versionConfigs.get(0).getVersion());
-        assertEquals("1.0.0", versionConfigs.get(versionConfigs.size() - 1).getVersion());
+        assertEquals("4.1", versionConfigs.get(0).getVersion());
+        assertEquals("0.1.0", versionConfigs.get(versionConfigs.size() - 1).getVersion());
     }
 }

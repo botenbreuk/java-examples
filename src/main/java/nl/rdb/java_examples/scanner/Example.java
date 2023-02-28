@@ -10,5 +10,7 @@ import java.lang.annotation.Target;
 public @interface Example {
     String name() default "";
 
+    boolean showClassMethod() default false;
+
     boolean disabled() default false;
 }
