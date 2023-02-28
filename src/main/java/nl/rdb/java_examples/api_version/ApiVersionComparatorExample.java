@@ -14,10 +14,13 @@ public class ApiVersionComparatorExample {
     public ApiVersionComparatorExample() {
         versionConfigs.add(ApiVersionConfig.of("1.1.0", true));
         versionConfigs.add(ApiVersionConfig.of("1.0.0", true));
+        versionConfigs.add(ApiVersionConfig.of("10.1", true));
         versionConfigs.add(ApiVersionConfig.of("0.1.0", true));
         versionConfigs.add(ApiVersionConfig.of("1.2.0", true));
+        versionConfigs.add(ApiVersionConfig.of("2.1.2", true));
         versionConfigs.add(ApiVersionConfig.of("4", true));
         versionConfigs.add(ApiVersionConfig.of("1.1.1", true));
+        versionConfigs.add(ApiVersionConfig.of("21", true));
         versionConfigs.add(ApiVersionConfig.of("4.1", true));
         versionConfigs.add(ApiVersionConfig.of("3.1.1", true));
     }
