@@ -10,12 +10,12 @@ import nl.rdb.java_examples.scanner.Example;
 @Slf4j
 public class ClockExample {
 
-    private final LocalDateTime reference_date_time = LocalDateTime.of(2016, 4, 1, 10, 0); //2016-04-01 at 10:00am
+    private final LocalDateTime referenceDateTime = LocalDateTime.of(2016, 4, 1, 10, 0); //2016-04-01 at 10:00am
     private final ZoneId defaultZone = ZoneId.systemDefault();
-    private final Clock fixed_clock = Clock.fixed(reference_date_time.atZone(defaultZone).toInstant(), defaultZone);
+    private final Clock fixedClock = Clock.fixed(referenceDateTime.atZone(defaultZone).toInstant(), defaultZone);
 
     public LocalDateTime showTime() {
-        return LocalDateTime.now(fixed_clock);
+        return LocalDateTime.now(fixedClock);
     }
 
     public LocalDateTime showRealTime() {
