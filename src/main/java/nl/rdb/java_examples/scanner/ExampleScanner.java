@@ -33,7 +33,7 @@ public class ExampleScanner {
                         Method m = clazz.getMethod(method.getName());
                         m.invoke(clazz.getDeclaredConstructor().newInstance());
                     } catch (Exception e) {
-                        log.error("Could not make instance");
+                        log.error("Could not make instance", e);
                     }
                 });
     }
