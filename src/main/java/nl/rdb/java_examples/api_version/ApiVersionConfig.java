@@ -23,4 +23,9 @@ public class ApiVersionConfig {
     public boolean isSupported() {
         return supported;
     }
+
+    @Override
+    public String toString() {
+        return version;
+    }
 }

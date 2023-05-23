@@ -34,4 +34,12 @@ public class ApiVersionComparatorExample {
     public void testComparatorReversed() {
         versionConfigs.stream().sorted(new ApiVersionComparator().reversed()).forEach(api -> log.info("{}", api.getVersion()));
     }
+
+    @Example(name = "API sorted min and max")
+    public void testComparatorMinAndMax() {
+        ApiVersionConfig min = versionConfigs.stream().min(new ApiVersionComparator()).orElse(null);
+        ApiVersionConfig max = versionConfigs.stream().max(new ApiVersionComparator()).orElse(null);
+
+        log.info("Min: {}; Max: {}", min, max);
+    }
 }
