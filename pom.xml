@@ -12,7 +12,7 @@
         <maven.compiler.release>17</maven.compiler.release>
 
         <junit.version>5.9.2</junit.version>
-        <google-guava.version>31.1-jre</google-guava.version>
+        <google-guava.version>32.0.0-jre</google-guava.version>
         <commons-collectiosn.version>4.4</commons-collectiosn.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <lombok.version>1.18.26</lombok.version>
