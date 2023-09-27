@@ -1,4 +1,4 @@
-package nl.rdb.java_examples.builder;
+package nl.rdb.java_examples.builder.simple;
 
 import nl.rdb.java_examples.entities.Address;
 

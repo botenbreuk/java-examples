@@ -1,4 +1,4 @@
-package nl.rdb.java_examples.builder;
+package nl.rdb.java_examples.builder.simple;
 
 import nl.rdb.java_examples.entities.Address;
 import nl.rdb.java_examples.entities.Person;
@@ -31,6 +31,7 @@ public class PersonBuilder {
         private Person person = new Person();
 
         public PersonBuildCommand() {}
+
         public PersonBuildCommand(Person person) {
             this.person = person;
         }
