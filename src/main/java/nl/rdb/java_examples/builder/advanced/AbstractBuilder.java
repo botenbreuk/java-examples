@@ -18,7 +18,7 @@ public abstract class AbstractBuilder<T, BC extends AbstractBuildCommand<T>> {
     public BC blank() {
         initObject();
 
-        return null;
+        return (BC) new Object();
     }
 
     public T build() {
@@ -31,7 +31,7 @@ public abstract class AbstractBuilder<T, BC extends AbstractBuildCommand<T>> {
                     .getDeclaredConstructor()
                     .newInstance();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            log.error("An error occurred: {}", e.getMessage(), e);
         }
     }
 }
