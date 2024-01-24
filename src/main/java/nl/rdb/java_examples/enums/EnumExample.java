@@ -7,7 +7,7 @@ import nl.rdb.java_examples.scanner.Example;
 public class EnumExample {
 
     @Example
-    public void nameToStringExample() {
+    void nameToStringExample() {
         log.info(TestEnum.HELLO.name());
         log.info("{}", Authority.CLIENTS_MANAGE);
     }

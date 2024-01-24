@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 public class JsonExample {
 
     @Example
-    public void gsonClassModel() {
+    void gsonClassModel() {
         Gson gson = new Gson();
         log.info("{}", gson.toJson(new TestObj()));
     }

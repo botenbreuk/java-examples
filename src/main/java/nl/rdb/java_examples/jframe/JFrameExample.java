@@ -11,7 +11,7 @@ import nl.rdb.java_examples.scanner.Example;
 public class JFrameExample {
 
     @Example(disabled = true)
-    public void jframeExample() {
+    void jframeExample() {
         JFrame frame = new JFrame("JFrame Example");
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());

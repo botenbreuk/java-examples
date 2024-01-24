@@ -7,7 +7,7 @@ import nl.rdb.java_examples.scanner.Example;
 public class HashExample {
 
     @Example
-    public void hashValueDifferentOrderNotTheSame() {
+    void hashValueDifferentOrderNotTheSame() {
         log.info("appel test: {}", "appel test".hashCode());
         log.info("test apple: {}", "test apple".hashCode());
     }

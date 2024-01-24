@@ -23,7 +23,7 @@ public class ClockExample {
     }
 
     @Example
-    public void showTimeFormat() {
+    void showTimeFormat() {
         ClockExample clockExample = new ClockExample();
         log.info("{}", clockExample.showRealTime());
         log.info("{}", clockExample.showTime());

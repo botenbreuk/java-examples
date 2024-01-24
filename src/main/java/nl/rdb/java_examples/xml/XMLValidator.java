@@ -19,7 +19,7 @@ import org.xml.sax.SAXException;
 public class XMLValidator {
 
     @Example
-    public void xmlValid() {
+    void xmlValid() {
         String xml = "data/xml/test.xml";
         String xsd = "data/xml/test.xsd";
 
@@ -27,7 +27,7 @@ public class XMLValidator {
     }
 
     @Example
-    public void xmlNotValid() {
+    void xmlNotValid() {
         String xml = "data/xml/test.xml";
         String xsd = "data/xml/test-2.xsd";
 

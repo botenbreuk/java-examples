@@ -7,17 +7,17 @@ import nl.rdb.java_examples.scanner.Example;
 public class StringExample {
 
     @Example
-    public void generateExample() {
+    void generateExample() {
         log.info(new CodeGenerator().getCode());
     }
 
     @Example(name = "Unique id generator")
-    public void generateUniqueId() {
+    void generateUniqueId() {
         new UniqueIdGenerator().generateUID(4);
     }
 
     @Example
-    public void stringReplace() {
+    void stringReplace() {
         String str = "42 B.V.";
         log.info(str.replaceAll("[,. ]", "").toLowerCase());
         String str2 = "42bv";

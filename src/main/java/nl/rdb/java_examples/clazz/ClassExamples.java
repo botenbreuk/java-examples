@@ -8,7 +8,7 @@ import nl.rdb.java_examples.scanner.Example;
 public class ClassExamples {
 
     @Example
-    public void classNameStringExample() {
+    void classNameStringExample() {
         log.info(Charmander.class.getName());
         log.info(Charmander.class.getSimpleName());
     }

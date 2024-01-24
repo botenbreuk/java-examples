@@ -7,7 +7,7 @@ import nl.rdb.java_examples.scanner.Example;
 public class LoopingExample {
 
     @Example(disabled = true)
-    public void loopingExample() {
+    void loopingExample() {
         Looping.loopie(0, 100000, obj -> log.info("{}", obj));
     }
 }

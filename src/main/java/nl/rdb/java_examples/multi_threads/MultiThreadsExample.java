@@ -15,7 +15,7 @@ public class MultiThreadsExample {
     static Queue<String> queue = new SynchronizedCircularQueue<>(10);
 
     @Example(disabled = true)
-    public void queueMultiThreads() {
+    void queueMultiThreads() {
         log.info("Now starting Queue logic");
 
         for (int i = 0; i < MAX_IN_QUEUE; i++) {

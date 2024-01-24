@@ -15,7 +15,7 @@ import nl.rdb.java_examples.scanner.Example;
 public class FilterExample {
 
     @Example
-    public void filter() {
+    void filter() {
         List<Gebruiker> gebruikers = new ArrayList<>();
 
         gebruikers.add(new Gebruiker("Jan", "jan@email.nl", 17, new ArrayList<>()));

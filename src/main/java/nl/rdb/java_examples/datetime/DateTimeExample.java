@@ -14,13 +14,13 @@ import nl.rdb.java_examples.scanner.Example;
 public class DateTimeExample {
 
     @Example
-    public void dateTime() {
+    void dateTime() {
         LocalDateTime dateTime = LocalDateTime.of(2018, 11, 02, 12, 32, 22, 300);
         log.info(dateTime.toLocalTime().toString());
     }
 
     @Example
-    public void format() {
+    void format() {
         String dateTime = "2023-07-05T11:05:00.000+0000";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ").withLocale(Locale.forLanguageTag("nl"));
         String test = dtf.format(LocalDateTime.of(2023, 7, 5, 11, 5, 0, 0).atOffset(ZoneOffset.UTC));
@@ -33,7 +33,7 @@ public class DateTimeExample {
     }
 
     @Example
-    public void formatZoneOffset() {
+    void formatZoneOffset() {
         ZoneId systemZone = ZoneId.systemDefault(); // my timezone
         ZoneOffset currentOffsetForMyZone = systemZone.getRules().getOffset(LocalDateTime.now());
 
@@ -51,7 +51,7 @@ public class DateTimeExample {
     }
 
     @Example
-    public void timeUnitExample() {
+    void timeUnitExample() {
         log.info("{}", TimeUnit.HOURS.toMillis(1));
     }
 }

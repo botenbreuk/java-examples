@@ -7,7 +7,7 @@ import nl.rdb.java_examples.scanner.Example;
 public class SwitchExample {
 
     @Example(name = "Enum switch test")
-    public void returnExample() {
+    void returnExample() {
         Test test = Test.TEST1;
         Test test2 = Test.TEST2;
         Test test3 = Test.TEST3;

@@ -1,6 +1,7 @@
 package nl.rdb.java_examples.scanner;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Set;
 
@@ -12,7 +13,9 @@ import org.reflections.scanners.Scanners;
 @Slf4j
 public class ExampleScanner {
 
-    public void executeExamples() {
+    private ExampleScanner() {}
+
+    public static void executeExamples() {
         Reflections reflections = new Reflections("nl.rdb.java_examples", Scanners.values());
 
         Set<Method> methods = reflections.getMethodsAnnotatedWith(Example.class);
@@ -30,7 +33,11 @@ public class ExampleScanner {
                         log.info(topBottomBar);
 
                         Class<?> clazz = method.getDeclaringClass();
-                        Method m = clazz.getMethod(method.getName());
+                        Method m = Arrays.stream(clazz.getDeclaredMethods())
+                                .filter(v -> v.getName().equals(method.getName()))
+                                .findFirst()
+                                .orElse(null);
+                        m.setAccessible(true);
                         m.invoke(clazz.getDeclaredConstructor().newInstance());
                     } catch (Exception e) {
                         log.error("Could not make instance", e);
@@ -38,7 +45,7 @@ public class ExampleScanner {
                 });
     }
 
-    private String determineLabel(Example annotation, Method method) {
+    private static String determineLabel(Example annotation, Method method) {
         String name = !annotation.name().isEmpty() ? annotation.name() : method.getName();
         if (annotation.showClassMethod()) {
             return "%s::%s - %s".formatted(method.getDeclaringClass().getSimpleName(), method.getName(), name);
@@ -47,7 +54,7 @@ public class ExampleScanner {
         }
     }
 
-    private String determineStr(String text) {
+    private static String determineStr(String text) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("/----");
         text.chars().forEach(v -> stringBuilder.append("-"));

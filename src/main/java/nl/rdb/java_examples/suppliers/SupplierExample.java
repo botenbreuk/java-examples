@@ -27,7 +27,7 @@ public class SupplierExample {
     }
 
     @Example
-    public void supplierExample() {
+    void supplierExample() {
         SupplierExample supplierExample = new SupplierExample();
 
         List<String> stringList = supplierExample.getDocumentsReference().documentNames().get();

@@ -11,7 +11,7 @@ import com.google.common.collect.Lists;
 public class TimeLoggerExample {
 
     @Example(name = "TimeLogger with Name as parameter")
-    public void timeLoggerWithName() {
+    void timeLoggerWithName() {
         String name = getClass().getSimpleName();
 
         TimeLogger.logTimeFinish(name, "Testing the Timelogger only finish", () -> log.info("I have meen called"));
@@ -47,7 +47,7 @@ public class TimeLoggerExample {
     }
 
     @Example
-    public void timeLogger() {
+    void timeLogger() {
         TimeLogger.logTimeFinish("Testing the Timelogger only finish", () -> log.info("I have meen called"));
 
         String hello = TimeLogger.logTimeFinish("Testing the Timelogger finish with return", () -> "Returned Hello world!");

@@ -7,6 +7,6 @@ import nl.rdb.java_examples.scanner.ExampleScanner;
 public class JavaExamples {
 
     public static void main(String[] args) {
-        new ExampleScanner().executeExamples();
+        ExampleScanner.executeExamples();
     }
 }

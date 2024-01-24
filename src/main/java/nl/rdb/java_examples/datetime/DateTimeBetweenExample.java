@@ -9,13 +9,13 @@ import nl.rdb.java_examples.scanner.Example;
 public class DateTimeBetweenExample {
 
     @Example
-    public void isTocayBetween() {
+    void isTocayBetween() {
         boolean isBetween = isTodayBetweenCheck(LocalDateTime.now(), LocalDateTime.now());
         log.info("{}", isBetween ? "Ja" : "Nee");
     }
 
     @Example
-    public void isNotBetween() {
+    void isNotBetween() {
         boolean notBetween = !isTodayBetweenCheck(LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(2));
         log.info("{}", notBetween ? "Ja" : "Nee");
     }

@@ -7,7 +7,7 @@ import nl.rdb.java_examples.scanner.Example;
 public class NumbersExample {
 
     @Example
-    public void numberStrConcat() {
+    void numberStrConcat() {
         String numberConcat = 1 + 1 + 2 + "6";
         log.info(numberConcat);
     }

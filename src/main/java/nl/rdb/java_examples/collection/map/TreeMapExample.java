@@ -11,7 +11,7 @@ import nl.rdb.java_examples.scanner.Example;
 public class TreeMapExample {
 
     @Example(name = "TreeMap sorting example")
-    public void treeMapSorting() {
+    void treeMapSorting() {
         Comparator<String> comparator = Comparator.comparing(str -> str);
         Map<String, Integer> map = new TreeMap<>(comparator);
 
@@ -23,7 +23,7 @@ public class TreeMapExample {
     }
 
     @Example(name = "TreeMap sorting with Objects as keys example")
-    public void treeMapSortingObjectKeys() {
+    void treeMapSortingObjectKeys() {
         Comparator<Person> comparator = Comparator.comparing(Person::name).thenComparing(Person::age);
         Map<Person, Class> map = new TreeMap<>(comparator);
 

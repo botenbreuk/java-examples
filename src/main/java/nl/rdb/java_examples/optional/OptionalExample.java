@@ -9,7 +9,7 @@ import nl.rdb.java_examples.scanner.Example;
 public class OptionalExample {
 
     @Example
-    public void optionalFilter() {
+    void optionalFilter() {
         Optional<Person> str = Optional.of(new Person("Pietje", 21));
         int age = str
                 .filter(value -> value.name.equals("Pietje"))
