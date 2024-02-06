@@ -47,15 +47,13 @@ public class ListExample {
     @Example
     void anyMatchExample() {
         List<String> listOfLetters = Arrays.asList("a", "b", "c", "d");
-        List<String> listOfLettersWithOverlap = Arrays.asList("d", "e", "f", "g");
-        List<String> listOfCities = Arrays.asList("London", "Berlin", "Paris", "Brussels");
 
         boolean shouldBeTrue = listOfLetters.stream()
-                .anyMatch(listOfLettersWithOverlap::contains);
-        log.info("shouldBeTrue: {}", shouldBeTrue);
+                .anyMatch(List.of("d", "e", "f", "g")::contains);
+        log.info("Has overlapping items: {}", shouldBeTrue);
 
         boolean shouldBeFalse = listOfLetters.stream()
-                .anyMatch(listOfCities::contains);
+                .anyMatch(List.of("London", "Berlin", "Paris", "Brussels")::contains);
         log.info("shouldBeFalse: {}", shouldBeFalse);
     }
 }
