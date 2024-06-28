@@ -36,8 +36,8 @@ public class ExampleScanner {
                         Method m = Arrays.stream(clazz.getDeclaredMethods())
                                 .filter(v -> v.getName().equals(method.getName()))
                                 .findFirst()
-                                .orElse(null);
-                        m.setAccessible(true);
+                                .orElseThrow();
+                        m.trySetAccessible();
                         m.invoke(clazz.getDeclaredConstructor().newInstance());
                     } catch (Exception e) {
                         log.error("Could not make instance", e);

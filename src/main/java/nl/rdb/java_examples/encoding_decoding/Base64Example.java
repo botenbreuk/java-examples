@@ -19,7 +19,20 @@ import nl.rdb.java_examples.scanner.Example;
 public class Base64Example {
 
     @Example
-    void base64Example() throws Exception {
+    void base64StringExample() throws Exception {
+        try (var out1 = new ByteArrayOutputStream();) {
+            serialize("Hello world!", out1);
+            log.info("Encoding 1: {}", out1);
+        }
+
+        try (var out2 = new ByteArrayOutputStream();) {
+            serialize("Hello world!", out2);
+            log.info("Encoding 2: {}", out2);
+        }
+    }
+
+    @Example
+    void base64MapExample() throws Exception {
         Map<String, Object> map = new HashMap<>();
         map.put("Long", 1L);
         map.put("String", "StringValue");
@@ -37,6 +50,15 @@ public class Base64Example {
             Map<String, Object> map2 = deserialize(in);
             log.info("Testing: {}", map2.get("String"));
         }
+    }
+
+    private void serialize(String str, OutputStream out) throws IOException {
+        var byteArrayOutputStream = new ByteArrayOutputStream(1024);
+        var encodingStream = Base64.getEncoder().wrap(byteArrayOutputStream);
+        try (var objectOutputStream = new ObjectOutputStream(encodingStream)) {
+            objectOutputStream.writeObject(str);
+        }
+        out.write(byteArrayOutputStream.toByteArray());
     }
 
     /**

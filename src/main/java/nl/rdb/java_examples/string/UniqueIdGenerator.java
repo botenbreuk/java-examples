@@ -9,7 +9,7 @@ public class UniqueIdGenerator {
 
     public void generateUID(int number) {
         for (int i = 0; i < number; i++) {
-            log.info(UUID.randomUUID().toString());
+            log.info(UUID.randomUUID().toString().toUpperCase());
         }
     }
 }
