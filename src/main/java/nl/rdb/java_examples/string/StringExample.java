@@ -23,4 +23,12 @@ public class StringExample {
         String str2 = "42bv";
         log.info(str2.replaceAll("[,. ]", "").toLowerCase());
     }
+
+    @Example
+    void replace() {
+        String test = "... ... \\. ..";
+
+        log.info("{}", test.replace(".", "Test-"));
+        log.info("{}", test.replaceAll("\\.", "Test-"));
+    }
 }
