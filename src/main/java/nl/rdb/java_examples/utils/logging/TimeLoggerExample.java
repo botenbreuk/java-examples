@@ -43,7 +43,23 @@ public class TimeLoggerExample {
         List<List<String>> parts = Lists.newArrayList(first, second);
         TimeLogger.logTimeStartFinish(name, "Testing partitions", parts, part -> log.info("Joining parts: {}", String.join(" ", part)));
 
-        TimeLogger.logStartFinish(name, "Testing timelogger with sleep", () -> log.info("Start finish"));
+        TimeLogger.logStartFinish(name, "Testing timelogger with sleep", () -> {
+            try {
+                Thread.sleep(300);
+                log.info("Start finish");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        TimeLogger.logTimeStartFinish(name, "Testing timelogger with sleep and time", () -> {
+            try {
+                Thread.sleep(321);
+                log.info("Start finish time");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Example

@@ -2,6 +2,7 @@ package nl.rdb.java_examples.utils.logging;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -18,15 +19,12 @@ import org.apache.commons.lang3.time.StopWatch;
 @Slf4j
 public class TimeLogger {
 
-    private static final String METHOD_STRING = "Method: \"%s\". Message: %s";
-
     private TimeLogger() {throw new IllegalStateException("Utility class");}
 
     public static void logTimeFinish(String name, String message, Runnable function) {
         StopWatch stopWatch = StopWatch.createStarted();
         function.run();
-        stopWatch.stop();
-        log.info("{} > {} took {}ms", name, message, stopWatch.getTime());
+        Log.duration(name, message, stopWatch);
     }
 
     public static void logTimeFinish(String message, Runnable function) {
@@ -37,8 +35,7 @@ public class TimeLogger {
     public static <T> T logTimeFinish(String name, String message, Supplier<T> function) {
         StopWatch stopWatch = StopWatch.createStarted();
         T result = function.get();
-        stopWatch.stop();
-        log.info("{} > {} took {}ms", name, message, stopWatch.getTime());
+        Log.duration(name, message, stopWatch);
         return result;
     }
 
@@ -48,9 +45,9 @@ public class TimeLogger {
     }
 
     public static <T> T logTimeStartFinish(String name, String message, Supplier<T> function) {
-        StopWatch stopWatch = startTime(name, message);
+        StopWatch stopWatch = Log.startTime(name, message);
         T result = function.get();
-        stopTIme(stopWatch, name, message);
+        Log.stopTIme(stopWatch, name, message);
         return result;
     }
 
@@ -60,15 +57,15 @@ public class TimeLogger {
     }
 
     public static void logTimeStartFinish(String name, String message, Runnable function) {
-        StopWatch stopWatch = startTime(name, message);
+        StopWatch stopWatch = Log.startTime(name, message);
         function.run();
-        stopTIme(stopWatch, name, message);
+        Log.stopTIme(stopWatch, name, message);
     }
 
     public static <T> T logTimeStartFinishUn(String name, String message, T obj, UnaryOperator<T> function) {
-        StopWatch stopWatch = startTime(name, message);
+        StopWatch stopWatch = Log.startTime(name, message);
         T result = function.apply(obj);
-        stopTIme(stopWatch, name, message);
+        Log.stopTIme(stopWatch, name, message);
         return result;
     }
 
@@ -78,9 +75,9 @@ public class TimeLogger {
     }
 
     public static <T, R> R logTimeStartFinishFn(String name, String message, T obj, Function<T, R> function) {
-        StopWatch stopWatch = startTime(name, message);
+        StopWatch stopWatch = Log.startTime(name, message);
         R result = function.apply(obj);
-        stopTIme(stopWatch, name, message);
+        Log.stopTIme(stopWatch, name, message);
         return result;
     }
 
@@ -112,16 +109,16 @@ public class TimeLogger {
     }
 
     public static void logStartFinish(String name, String message, Runnable function) {
-        log.info("{} > Started: {}", name, message);
+        Log.startTime(name, message);
         function.run();
-        log.info("{} > Finished: {}", name, message);
+        Log.finish(name, message);
     }
 
     public static <T> T logStartFinish(String message, T obj, UnaryOperator<T> function) {
         CalledByClassMethod calledBy = new CalledByClassMethod();
-        log.info("{} > Started: {}", calledBy.getShortClass(), message);
+        Log.start(calledBy.getShortClass(), message);
         T result = function.apply(obj);
-        log.info("{} > Finished: {}", calledBy.getShortClass(), message);
+        Log.finish(calledBy.getShortClass(), message);
         return result;
     }
 
@@ -130,34 +127,71 @@ public class TimeLogger {
         logStartFinish(calledBy.getShortClass(), calledBy.getClassMethod(message), function);
     }
 
-    private static StopWatch startTime(String name, String message) {
-        log.info("{} > Started: {}", name, message);
-        return StopWatch.createStarted();
+    public static void logStartFinishWithEx(String name, String message, Callable<?> function) {
+        Log.start(name, message);
+        try {
+            function.call();
+        } catch (Exception ex) {
+            log.error("Something went wrong with method: {}, message: {}", name, ex.getMessage(), ex);
+        }
+
+        Log.finish(name, message);
     }
 
-    private static void stopTIme(StopWatch stopWatch, String name, String message) {
-        stopWatch.stop();
-        log.info("{} > Finished: {} took {}ms", name, message, stopWatch.getTime());
+    public static void logStartFinishWithEx(String message, Callable<?> function) {
+        CalledByClassMethod calledBy = new CalledByClassMethod();
+        logStartFinishWithEx(calledBy.getShortClass(), calledBy.getClassMethod(message), function);
     }
 
     private static final class CalledByClassMethod {
+
         private final String className;
         private final String methodName;
+        private final int lineNumber;
 
         private CalledByClassMethod() {
             StackTraceElement trace = Arrays.stream(new Throwable().getStackTrace()).limit(5).toList().get(2);
             this.className = trace.getClassName();
             this.methodName = trace.getMethodName();
+            this.lineNumber = trace.getLineNumber();
         }
 
         public String getShortClass() {return Arrays.stream(className.split("\\.")).reduce((first, second) -> second).orElse("");}
 
         public String getClassMethod() {
-            return "%s::%s()".formatted(getShortClass(), this.methodName);
+            return "%s:%d :: %s()".formatted(getShortClass(), this.lineNumber, this.methodName);
         }
 
         public String getClassMethod(String message) {
-            return METHOD_STRING.formatted(getClassMethod(), message);
+            return "Method: \"%s\". Message: %s".formatted(getClassMethod(), message);
+        }
+    }
+
+    private static final class Log {
+
+        private Log() {throw new IllegalStateException("Utility class");}
+
+        static void start(String name, String message) {
+            log.info("{} > Started: {}", name, message);
+        }
+
+        static void finish(String name, String message) {
+            log.info("{} > Finished: {}", name, message);
+        }
+
+        static StopWatch startTime(String name, String message) {
+            start(name, message);
+            return StopWatch.createStarted();
+        }
+
+        static void stopTIme(StopWatch stopWatch, String name, String message) {
+            stopWatch.stop();
+            log.info("{} > Finished: {} took {}ms", name, message, stopWatch.getTime());
+        }
+
+        static void duration(String name, String message, StopWatch stopWatch) {
+            stopWatch.stop();
+            log.info("{} > {} took {}ms", name, message, stopWatch.getTime());
         }
     }
 }
