@@ -24,5 +24,6 @@ jobs:
       - name: OWASP check
         with:
           owasp_api_key: ${{ secrets.OWASP_API_KEY }}
-        run: mvn dependency-check:check -DnvdApiKey="%owasp_api_key%"
+        run: |
+          mvn dependency-check:check -DnvdApiKey="%owasp_api_key%"
       - uses: codecov/codecov-action@v2
