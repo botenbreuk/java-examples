@@ -159,11 +159,11 @@ public class TimeLogger {
         public String getShortClass() {return Arrays.stream(className.split("\\.")).reduce((first, second) -> second).orElse("");}
 
         public String getClassMethod() {
-            return "%s:%d :: %s()".formatted(getShortClass(), this.lineNumber, this.methodName);
+            return "(%s.java:%d) :: %s()".formatted(getShortClass(), this.lineNumber, this.methodName);
         }
 
         public String getClassMethod(String message) {
-            return "Method: \"%s\". Message: %s".formatted(getClassMethod(), message);
+            return "Method: %s. Message: %s".formatted(getClassMethod(), message);
         }
     }
 
