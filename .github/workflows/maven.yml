@@ -22,8 +22,8 @@ jobs:
       - name: Build with Maven
         run: mvn clean verify
       - name: OWASP check
-        with:
-          owasp_api_key: ${{ secrets.OWASP_API_KEY }}
+        env:
+          OWASP_API_KEY: ${{ secrets.OWASP_API_KEY }}
         run: |
-          mvn dependency-check:check -DnvdApiKey="%owasp_api_key%"
+          mvn dependency-check:check -DnvdApiKey=$OWASP_API_KEY
       - uses: codecov/codecov-action@v2
