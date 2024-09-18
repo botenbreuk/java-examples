@@ -141,7 +141,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>8.2.1</version>
+                <version>10.0.4</version>
                 <configuration>
                     <failBuildOnCVSS>0</failBuildOnCVSS>
                     <skipProvidedScope>true</skipProvidedScope>
@@ -171,5 +171,5 @@
                 </executions>
             </plugin>
         </plugins>
-    </build><repositories><repository><id>maven_central</id><name>Maven Central</name><url>https://repo.maven.apache.org/maven2/</url></repository></repositories>
+    </build>
 </project>
