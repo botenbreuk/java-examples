@@ -9,6 +9,7 @@ import static org.apache.commons.collections4.CollectionUtils.disjunction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,6 +74,22 @@ public class ListExample {
         boolean shouldBeFalse = listOfLetters.stream()
                 .anyMatch(List.of("London", "Berlin", "Paris", "Brussels")::contains);
         log.info("shouldBeFalse: {}", shouldBeFalse);
+    }
+
+    @Example
+    void flatMapExample() {
+        // Creating a List of Lists
+        List<List<PetType>> listOfLists = Arrays.asList(
+                List.of(DOG, CAT),
+                List.of(DOG, CAT, HAMSTER, FISH)
+        );
+
+        // Using Stream flatMap(Function mapper)
+        listOfLists.stream()
+                .flatMap(Collection::stream)
+                .map(Enum::name)
+                .collect(Collectors.toSet())
+                .forEach(log::info);
     }
 }
 
