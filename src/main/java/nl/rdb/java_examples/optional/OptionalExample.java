@@ -1,8 +1,10 @@
 package nl.rdb.java_examples.optional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.rdb.java_examples.scanner.Example;
@@ -40,6 +42,25 @@ public class OptionalExample {
                 .map(value -> value.age)
                 .orElse(1);
         log.info("Age is: {}", age);
+    }
+
+    @Example
+    void optionalFilterNull() {
+        Optional<Person> str = Optional.ofNullable(null);
+        int age = str
+                .filter(value -> value.name.equals("Pietje"))
+                .map(value -> value.age)
+                .orElse(1);
+        log.info("Age is: {}", age);
+    }
+
+    @Example
+    void optionalList() {
+        List<Optional<Person>> optionals = List.of(Optional.of(new Person("Pietje", 21)), Optional.ofNullable(null), Optional.of(new Person("Jantje", 21)));
+        var list = optionals.stream()
+                .map(p -> p.map(Person::name).orElse(null))
+                .collect(Collectors.joining(", "));
+        log.info("{}", list);
     }
 
     private record Person(String name, int age) {}
