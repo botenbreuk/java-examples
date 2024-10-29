@@ -15,6 +15,7 @@ public class NumbersExample {
     @Example
     void moduloExample() {
         log.info("{} and {}", modulo(3213, 4), 3213 % 4);
+        log.info("{} and {}", modulo(5553, 100), 5553 % 100);
     }
 
     private int modulo(int value, int divider) {

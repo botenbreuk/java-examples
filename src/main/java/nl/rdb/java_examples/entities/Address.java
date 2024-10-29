@@ -1,5 +1,10 @@
 package nl.rdb.java_examples.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class Address {
 
     private String street;
@@ -16,35 +21,11 @@ public class Address {
         this.country = country;
     }
 
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+    public String geFullAddress() {
+        return """
+                
+                %s
+                %s, %s
+                %s""".formatted(this.street, this.zipcode, this.city, this.country);
     }
 }
