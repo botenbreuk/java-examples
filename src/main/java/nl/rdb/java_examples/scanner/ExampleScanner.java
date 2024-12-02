@@ -40,7 +40,7 @@ public class ExampleScanner {
                         m.trySetAccessible();
                         m.invoke(clazz.getDeclaredConstructor().newInstance());
                     } catch (Exception e) {
-                        log.error("Could not make instance", e);
+                        log.error("An error occurred", e.getCause());
                     }
                 });
     }

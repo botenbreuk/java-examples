@@ -7,7 +7,7 @@ import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -21,7 +21,7 @@ class StringBuilderSpeedTest {
         long start = System.currentTimeMillis();
         str.append("String".repeat(Math.max(0, times)));
         long end = System.currentTimeMillis();
-        log.info("DEBUG: " + times + " test took " + (end - start) + " MilliSeconds");
+        log.info("DEBUG: {} test took {} MilliSeconds", times, end - start);
     }
 
     @ParameterizedTest
@@ -31,7 +31,7 @@ class StringBuilderSpeedTest {
         long start = System.currentTimeMillis();
         sb.append("String".repeat(Math.max(0, times)));
         long end = System.currentTimeMillis();
-        log.info("DEBUG: " + times + " test took " + (end - start) + " MilliSeconds");
+        log.info("DEBUG: {} test took {} MilliSeconds", times, end - start);
     }
 
     @Test

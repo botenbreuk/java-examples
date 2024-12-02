@@ -3,6 +3,7 @@
     <option name="ALTERNATIVE_JRE_PATH" value="corretto-21" />
     <option name="MAIN_CLASS_NAME" value="nl.rdb.java_examples.JavaExamples" />
     <module name="java_examples" />
+    <option name="VM_PARAMETERS" value="-Xmx4g" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="nl.rdb.scanner.*" />

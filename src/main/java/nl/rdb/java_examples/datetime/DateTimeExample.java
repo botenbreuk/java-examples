@@ -1,11 +1,16 @@
 package nl.rdb.java_examples.datetime;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.rdb.java_examples.scanner.Example;
@@ -53,5 +58,33 @@ public class DateTimeExample {
     @Example
     void timeUnitExample() {
         log.info("{}", TimeUnit.HOURS.toMillis(1));
+    }
+
+    @Example
+    void businessDays() {
+        record Test(LocalDateTime start, LocalDateTime end) {}
+
+        final LocalDateTime now = LocalDateTime.of(2024, 11, 20, 0, 0);
+        final LocalDateTime next = now.plusDays(7);
+
+        Stream.of(new Test(now, next), new Test(LocalDateTime.now(), LocalDateTime.now().plusDays(13)))
+                .map(v -> countBusinessDays(v.start, v.end).size())
+                .forEach(v -> log.info("{}", v));
+    }
+
+    private List<LocalDateTime> countBusinessDays(LocalDateTime startDate, LocalDateTime endDate) {
+        // Predicate 2: Is a given date is a weekday
+        Predicate<LocalDateTime> isWeekend = date -> date.getDayOfWeek() == DayOfWeek.SATURDAY
+                || date.getDayOfWeek() == DayOfWeek.SUNDAY;
+
+        // Get all days between two dates
+        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate) + 1;
+
+        // Iterate over stream of all dates and check each day against any weekday or
+        // holiday
+        return Stream.iterate(startDate, date -> date.plusDays(1))
+                .limit(daysBetween)
+                .filter(isWeekend.negate())
+                .toList();
     }
 }
