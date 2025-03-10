@@ -19,6 +19,7 @@ public class Job<T> {
     private final Reader<T> reader;
     private final int partitionSize;
     private final boolean parallel;
+    private final JobContext jobContext;
 
     public Job(Reader<T> reader, List<Step<T>> steps, int partitionSize) {
         this(reader, steps, partitionSize, false);
@@ -29,6 +30,7 @@ public class Job<T> {
         this.reader = reader;
         this.partitionSize = partitionSize;
         this.parallel = parallel;
+        this.jobContext = new JobContext();
     }
 
     public void run() {
