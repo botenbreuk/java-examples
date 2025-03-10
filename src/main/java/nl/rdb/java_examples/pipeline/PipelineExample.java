@@ -8,7 +8,7 @@ import nl.rdb.java_examples.scanner.Example;
 @Slf4j
 public class PipelineExample {
 
-    @Example
+    @Example(disabled = true)
     void pipeline() {
         Pipeline pipeline = Pipeline.builder()
                 .addJob(new Job("test")
