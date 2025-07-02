@@ -9,6 +9,7 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import nl.rdb.java_examples.entities.Address;
 import nl.rdb.java_examples.entities.Person;
+import nl.rdb.java_examples.entities.PersonJackson;
 import nl.rdb.java_examples.jackson.deserializers.LocalDateTimeDeserializer;
 import nl.rdb.java_examples.scanner.Example;
 
@@ -44,6 +45,15 @@ public class JacksonExample {
         String test = objectMapper.writeValueAsString(personList);
         log.info("JSON: {}", test);
         log.info("Length {}", test.getBytes(UTF_8).length);
+    }
+
+    @Example
+    void emptyObjectToJson() throws Exception {
+        String personJson = objectMapper.writeValueAsString(new Person());
+        log.info("JSON: {}", personJson);
+
+        String personJsonJackson = objectMapper.writeValueAsString(new PersonJackson());
+        log.info("JSON: {}", personJsonJackson);
     }
 
     @Example
