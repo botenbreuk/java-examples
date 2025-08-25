@@ -20,7 +20,7 @@ public class DateTimeExample {
 
     @Example
     void dateTime() {
-        LocalDateTime dateTime = LocalDateTime.of(2018, 11, 02, 12, 32, 22, 300);
+        LocalDateTime dateTime = LocalDateTime.of(2018, 11, 2, 12, 32, 22, 300);
         log.info(dateTime.toLocalTime().toString());
     }
 
@@ -70,6 +70,17 @@ public class DateTimeExample {
         Stream.of(new Test(now, next), new Test(LocalDateTime.now(), LocalDateTime.now().plusDays(13)))
                 .map(v -> countBusinessDays(v.start, v.end).size())
                 .forEach(v -> log.info("{}", v));
+    }
+
+    @Example
+    void isAfterCheck() {
+        LocalDateTime start = LocalDateTime.now().plusDays(1).toLocalDate().atStartOfDay();
+        LocalDateTime end1 = start.plusHours(1);
+        LocalDateTime end2 = LocalDateTime.now().plusDays(1).toLocalDate().atStartOfDay();
+
+        log.info("Is end1 after {}", end1.isAfter(start) ? "Yes" : "No");
+        log.info("Is end2 after {}", end2.isAfter(start) ? "Yes" : "No");
+        log.info("Is end2 equal {}", end2.isEqual(start) ? "Yes" : "No");
     }
 
     private List<LocalDateTime> countBusinessDays(LocalDateTime startDate, LocalDateTime endDate) {
