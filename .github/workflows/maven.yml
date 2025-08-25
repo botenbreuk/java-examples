@@ -13,17 +13,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Set up JDK 21
-        uses: actions/setup-java@v1
+      - name: Repository checkout
+        uses: actions/checkout@v4
+      - name: Cache local Maven repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-
+      - name: Set up JDK
+        uses: actions/setup-java@v4
         with:
           java-version: 21
-          cache: 'maven'
-      - name: Build with Maven
-        run: mvn clean verify
-      - name: OWASP check
+          distribution: 'adopt'
+      - name: OWASP Dependency Checks
         env:
-          OWASP_API_KEY: ${{ secrets.OWASP_API_KEY }}
-        run: |
-          mvn dependency-check:check -DnvdApiKey=$OWASP_API_KEY
-      - uses: codecov/codecov-action@v2
+          API_KEY: ${{ secrets.OWASP_API_KEY }}
+        run: mvn --batch-mode org.owasp:dependency-check-maven:check -DnvdApiKey="$OWASP_API_KEY"
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots package
+      - name: Code coverage with Codecov
+        uses: codecov/codecov-action@v4
