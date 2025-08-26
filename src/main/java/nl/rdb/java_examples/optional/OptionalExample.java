@@ -56,11 +56,15 @@ public class OptionalExample {
 
     @Example
     void optionalList() {
-        List<Optional<Person>> optionals = List.of(Optional.of(new Person("Pietje", 21)), Optional.ofNullable(null), Optional.of(new Person("Jantje", 21)));
-        var list = optionals.stream()
+        List<Optional<Person>> optionals = List.of(
+                Optional.of(new Person("Pietje", 21)),
+                Optional.ofNullable(null),
+                Optional.of(new Person("Jantje", 21))
+        );
+        var persons = optionals.stream()
                 .map(p -> p.map(Person::name).orElse(null))
                 .collect(Collectors.joining(", "));
-        log.info("{}", list);
+        log.info("{}", persons);
     }
 
     private record Person(String name, int age) {}
