@@ -12,11 +12,10 @@ import nl.rdb.java_examples.entities.Person;
 import nl.rdb.java_examples.entities.PersonJackson;
 import nl.rdb.java_examples.jackson.deserializers.LocalDateTimeDeserializer;
 import nl.rdb.java_examples.scanner.Example;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.module.SimpleModule;
 
 @Slf4j
 public class JacksonExample {
@@ -24,18 +23,18 @@ public class JacksonExample {
     private final ObjectMapper objectMapper;
 
     public JacksonExample() {
-        SimpleModule module = new JavaTimeModule();
+
+        SimpleModule module = new SimpleModule();
         module.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
 
-        ObjectMapper objMapper = new ObjectMapper();
-        objMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        objMapper.registerModule(module);
-
-        this.objectMapper = objMapper;
+        this.objectMapper = JsonMapper.builder()
+                .enable(SerializationFeature.INDENT_OUTPUT)
+                .addModule(module)
+                .build();
     }
 
     @Example(disabled = true)
-    void largeObjectToJsonSting() throws Exception {
+    void largeObjectToJsonSting() {
 
         List<Person> personList = new ArrayList<>();
         for (int i = 0; i < 10_000_000; i++) {
@@ -48,7 +47,7 @@ public class JacksonExample {
     }
 
     @Example
-    void emptyObjectToJson() throws Exception {
+    void emptyObjectToJson() {
         String personJson = objectMapper.writeValueAsString(new Person());
         log.info("JSON: {}", personJson);
 
@@ -57,7 +56,7 @@ public class JacksonExample {
     }
 
     @Example
-    void dateTimeModule() throws Exception {
+    void dateTimeModule() {
         record Test(LocalDateTime date) {}
 
         Test dateTime = objectMapper.readValue("{\"date\":\"22-12-2016 00:22\"}", Test.class);

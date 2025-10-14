@@ -23,8 +23,8 @@ class ApiVersionTest {
 
         Collections.reverse(versionConfigs);
 
-        assertEquals("1.2.0", versionConfigs.get(0).getVersion());
-        assertEquals("1.0.0", versionConfigs.get(versionConfigs.size() - 1).getVersion());
+        assertEquals("1.2.0", versionConfigs.getFirst().getVersion());
+        assertEquals("1.0.0", versionConfigs.getLast().getVersion());
     }
 
     @Test
@@ -38,8 +38,8 @@ class ApiVersionTest {
 
         Collections.reverse(versionConfigs);
 
-        assertNotEquals("1.2.0", versionConfigs.get(0).getVersion());
-        assertNotEquals("1.0.0", versionConfigs.get(versionConfigs.size() - 1).getVersion());
+        assertNotEquals("1.2.0", versionConfigs.getFirst().getVersion());
+        assertNotEquals("1.0.0", versionConfigs.getLast().getVersion());
     }
 
     @Test
@@ -60,8 +60,8 @@ class ApiVersionTest {
 
         versionConfigs = versionConfigs.stream().sorted(new ApiVersionComparator()).toList();
 
-        assertEquals("0.1.0", versionConfigs.get(0).getVersion());
-        assertEquals("21", versionConfigs.get(versionConfigs.size() - 1).getVersion());
+        assertEquals("0.1.0", versionConfigs.getFirst().getVersion());
+        assertEquals("21", versionConfigs.getLast().getVersion());
     }
 
     @Test
@@ -82,7 +82,7 @@ class ApiVersionTest {
 
         versionConfigs = versionConfigs.stream().sorted(new ApiVersionComparator().reversed()).toList();
 
-        assertEquals("21", versionConfigs.get(0).getVersion());
-        assertEquals("0.1.0", versionConfigs.get(versionConfigs.size() - 1).getVersion());
+        assertEquals("21", versionConfigs.getFirst().getVersion());
+        assertEquals("0.1.0", versionConfigs.getLast().getVersion());
     }
 }

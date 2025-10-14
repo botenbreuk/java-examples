@@ -1,31 +1,27 @@
 package nl.rdb.java_examples.jackson.deserializers;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
+
 import org.apache.commons.lang3.StringUtils;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.google.common.collect.Lists;
 
 public class LocalDateTimeDeserializer extends StdDeserializer<LocalDateTime> {
 
     public LocalDateTimeDeserializer() {
-        this(null);
-    }
-
-    protected LocalDateTimeDeserializer(Class<?> vc) {
-        super(vc);
+        super(LocalDateTime.class);
     }
 
     @Override
-    public LocalDateTime deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-        return fromString(jp.getText());
+    public LocalDateTime deserialize(JsonParser jp, DeserializationContext ctxt) {
+        return fromString(jp.getString());
     }
 
     private LocalDateTime fromString(String text) {
