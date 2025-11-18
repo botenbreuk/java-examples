@@ -32,6 +32,50 @@ public class Base64Example {
     }
 
     @Example
+    void base64() {
+        String test = """
+                -----BEGIN CERTIFICATE-----
+                MIIEHzCCAwegAwIBAgIJAOGFzLmVYmLkMA0GCSqGSIb3DQEBCwUAMIGQMQswCQYD
+                VQQGEwJOTDEVMBMGA1UECAwMWnVpZC1Ib2xsYW5kMRMwEQYDVQQHDApab2V0ZXJt
+                ZWVyMQ4wDAYDVQQKDAU0MiBCVjEiMCAGA1UECwwZRGVwYXJ0bWVudCBvZiBXZWJz
+                ZXJ2aWNlczEhMB8GA1UEAwwYNDIgQlYgU2VydmVyIENlcnRpZmljYXRlMB4XDTIw
+                MDEyNzE0MjYyMFoXDTIxMDYxMDE0MjYyMFowgaQxCzAJBgNVBAYTAk5MMRUwEwYD
+                VQQIEwxadWlkLUhvbGxhbmQxEzARBgNVBAcTClpvZXRlcm1lZXIxDjAMBgNVBAoT
+                BTQyIEJWMSUwIwYDVQQLExxEZXBhcnRtZW50IG9mIEltcGxlbWVudGF0aW9uMRIw
+                EAYDVQQDEwlsb2NhbGhvc3QxHjAcBgkqhkiG9w0BCQEWD2RldmVsb3BlckA0Mi5u
+                bDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKGyvQCvcU3y+c7aTjZl
+                ni7rpBTrms7oEea/krJmYoxNzMrFSNG2I8Z60jbDNI8RYH5p1Bv+DFnPm831Zsfh
+                dg2two6sm2YegQj0lbwR+XhRyky5OAh/Lxn3ognhC0Y3V1IR4IWCuIrAw770F0Uh
+                dSuGbe7Q/xnS9erBPrGgzYG93hbYEKijH1GGg0o3Kh7Yu3ahm1KxlujaHGX9p7Z0
+                a3Ggwkz2r63tFX7U4UcGJwRojYNORRTZRMHfw8SBZ5MmrLcKaRKH27O9oVlT8659
+                NWQCAm4f5lJdINzgapHsyrb0wNjI5IemI0mRMUeSt94Q/PfEdrKd1pcYLApdmFE1
+                0a0CAwEAAaNmMGQwCQYDVR0TBAIwADALBgNVHQ8EBAMCBeAwSgYDVR0RBEMwQYIJ
+                bG9jYWxob3N0ggU0Mi5ubIIPYml0YnVja2V0LjQyLm5sghBjb25mbHVlbmNlLjQy
+                Lm5sggpqaXJhLjQyLm5sMA0GCSqGSIb3DQEBCwUAA4IBAQCv83UWm2aNzRiOQZUd
+                uu/vzGV9nOw+440y4zwiGRFAUMiu/7GjVefmdyqhdF9ftCMm3IPerh6CkthfxviX
+                laZZIGV/5yuABErrswAdlZ+mU96Y65zVwSZBGjfN+5YYgpeE6Yo9Z1Sy0vkLrpYm
+                x4TLShWcKWBvHO/CWWMPeEUYNtc/AwM+zI+7xBR9vVfht71uD+HjNa3WbEFiA8xk
+                GUmUbF+3Oxlrgzo393Pa6x9UanjwynOxKJMIQD645+6EK8G+Rn5dN0ocJuwaOqlh
+                QRH1uWUzpMVp8pvTApatyWio1f2okTyMY601nkqwO9DSYYjVrL7QvNWuN75A38/o
+                wYPu
+                -----END CERTIFICATE-----
+                """;
+        String testing = "";
+        try (var out = new ByteArrayOutputStream();) {
+            serialize(test, out);
+
+            log.info("Test: {}", out);
+
+            testing = out.toString();
+        } catch (Exception ex) {
+            log.error("Test");
+        }
+
+        log.info("Base64: {}", testing);
+        log.info("Base64 -2: {}", new String(Base64.getEncoder().encode(test.getBytes())));
+    }
+
+    @Example
     void base64MapExample() throws Exception {
         Map<String, Object> map = new HashMap<>();
         map.put("Long", 1L);

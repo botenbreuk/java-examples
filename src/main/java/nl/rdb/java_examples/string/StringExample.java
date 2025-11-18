@@ -32,6 +32,17 @@ public class StringExample {
     }
 
     @Example
+    void finalString() {
+        final String example = "Testing: %s";
+
+        String formatted = example.formatted("Test 1");
+        log.info(formatted);
+
+        String stringFormat = String.format(example, "Test 2");
+        log.info(stringFormat);
+    }
+
+    @Example
     void replace() {
         String test = "... ... \\. ..";
 
