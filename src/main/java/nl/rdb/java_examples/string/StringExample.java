@@ -24,6 +24,12 @@ public class StringExample {
     }
 
     @Example
+    void numberStringZeroPrefix() {
+        String formatted = "%03d".formatted(42);
+        log.info(formatted);
+    }
+
+    @Example
     void stringReplace() {
         String str = "42 B.V.";
         log.info(str.replaceAll("[,. ]", "").toLowerCase());
