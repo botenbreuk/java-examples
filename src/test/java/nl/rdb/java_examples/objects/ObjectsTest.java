@@ -1,6 +1,6 @@
 package nl.rdb.java_examples.objects;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,8 +23,8 @@ class ObjectsTest {
 
             setValues(person);
 
-            assertEquals("Nieuwe naam", person.getNaam());
-            assertEquals(28, person.getAge());
+            assertThat(person.getNaam()).isEqualTo("Nieuwe naam");
+            assertThat(person.getAge()).isEqualTo(28);
         }
 
         private void setValues(Person person) {
@@ -36,6 +36,7 @@ class ObjectsTest {
         @Setter
         @AllArgsConstructor
         private static class Person {
+
             private String naam;
             private int age;
         }

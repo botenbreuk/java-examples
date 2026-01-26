@@ -1,8 +1,6 @@
 package nl.rdb.java_examples.equals;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +24,13 @@ class EqualsTest {
         testObjects.add(new TestObject("test1", List.of(testListObject1)));
         testObjects2.add(new TestObject("test1", List.of(testListObject2)));
 
-        assertEquals(testObjects, testObjects2);
+        assertThat(testObjects2).isEqualTo(testObjects);
     }
 
     @Getter
     @EqualsAndHashCode
     private class TestObject {
+
         private final String name;
         private final List<TestListObject> objs;
 
@@ -44,6 +43,7 @@ class EqualsTest {
     @Getter
     @EqualsAndHashCode
     private class TestListObject {
+
         @EqualsAndHashCode.Exclude
         private final String name;
         private final int age;
@@ -60,22 +60,22 @@ class EqualsTest {
         @Test
         void testStringEquals() {
             String test = "test";
-            assertTrue(test.equals("test"));
-            assertTrue(test == "test");
+            assertThat(test.equals("test")).isTrue();
+            assertThat(test == "test").isTrue();
 
             String test2 = "test";
-            assertTrue(test.equals(test2));
-            assertTrue(test == test2);
+            assertThat(test.equals(test2)).isTrue();
+            assertThat(test == test2).isTrue();
 
             test = test2;
-            assertTrue(test.equals(test2));
-            assertTrue(test == test2);
+            assertThat(test.equals(test2)).isTrue();
+            assertThat(test == test2).isTrue();
 
             String test3 = test;
-            assertTrue(test.equals(test2));
-            assertTrue(test.equals(test3));
-            assertTrue(test == test2);
-            assertTrue(test == test3);
+            assertThat(test.equals(test2)).isTrue();
+            assertThat(test.equals(test3)).isTrue();
+            assertThat(test == test2).isTrue();
+            assertThat(test == test3).isTrue();
         }
 
         // Test based on example in https://www.delftstack.com/howto/java/java-string-equals-vs-/
@@ -84,10 +84,10 @@ class EqualsTest {
             String str1 = "name";
             String str2 = "name";
             String str3 = new String("name");
-            assertTrue(str1.equals(str2));
-            assertTrue(str1 == str2);
-            assertTrue(str1.equals(str3));
-            assertFalse(str3 == str1);
+            assertThat(str1.equals(str2)).isTrue();
+            assertThat(str1 == str2).isTrue();
+            assertThat(str1.equals(str3)).isTrue();
+            assertThat(str3 == str1).isFalse();
         }
     }
 }

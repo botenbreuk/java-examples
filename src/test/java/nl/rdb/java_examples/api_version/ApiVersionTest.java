@@ -1,7 +1,6 @@
 package nl.rdb.java_examples.api_version;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,8 +22,8 @@ class ApiVersionTest {
 
         Collections.reverse(versionConfigs);
 
-        assertEquals("1.2.0", versionConfigs.getFirst().getVersion());
-        assertEquals("1.0.0", versionConfigs.getLast().getVersion());
+        assertThat(versionConfigs.getFirst().getVersion()).isEqualTo("1.2.0");
+        assertThat(versionConfigs.getLast().getVersion()).isEqualTo("1.0.0");
     }
 
     @Test
@@ -38,8 +37,8 @@ class ApiVersionTest {
 
         Collections.reverse(versionConfigs);
 
-        assertNotEquals("1.2.0", versionConfigs.getFirst().getVersion());
-        assertNotEquals("1.0.0", versionConfigs.getLast().getVersion());
+        assertThat(versionConfigs.getFirst().getVersion()).isNotEqualTo("1.2.0");
+        assertThat(versionConfigs.getLast().getVersion()).isNotEqualTo("1.0.0");
     }
 
     @Test
@@ -60,8 +59,8 @@ class ApiVersionTest {
 
         versionConfigs = versionConfigs.stream().sorted(new ApiVersionComparator()).toList();
 
-        assertEquals("0.1.0", versionConfigs.getFirst().getVersion());
-        assertEquals("21", versionConfigs.getLast().getVersion());
+        assertThat(versionConfigs.getFirst().getVersion()).isEqualTo("0.1.0");
+        assertThat(versionConfigs.getLast().getVersion()).isEqualTo("21");
     }
 
     @Test
@@ -82,7 +81,7 @@ class ApiVersionTest {
 
         versionConfigs = versionConfigs.stream().sorted(new ApiVersionComparator().reversed()).toList();
 
-        assertEquals("21", versionConfigs.getFirst().getVersion());
-        assertEquals("0.1.0", versionConfigs.getLast().getVersion());
+        assertThat(versionConfigs.getFirst().getVersion()).isEqualTo("21");
+        assertThat(versionConfigs.getLast().getVersion()).isEqualTo("0.1.0");
     }
 }

@@ -4,8 +4,7 @@ import static nl.rdb.java_examples.enums.Authority.CLIENTS_MANAGE;
 import static nl.rdb.java_examples.enums.Authority.EMAIL_SEND;
 import static nl.rdb.java_examples.enums.Authority.SERVERS_MANAGE;
 import static nl.rdb.java_examples.enums.Authority.SERVERS_READ;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Collections;
 import java.util.Set;
@@ -23,7 +22,7 @@ class ListTests {
         Set<Authority> authoritiesList1 = Sets.newHashSet(CLIENTS_MANAGE);
         Set<Authority> authoritiesList2 = Sets.newHashSet(CLIENTS_MANAGE, SERVERS_MANAGE);
 
-        assertFalse(Collections.disjoint(authoritiesList1, authoritiesList2));
+        assertThat(Collections.disjoint(authoritiesList1, authoritiesList2)).isFalse();
     }
 
     @Test
@@ -33,9 +32,9 @@ class ListTests {
         Set<Authority> authoritiesList3 = Sets.newHashSet(SERVERS_READ, SERVERS_MANAGE);
 
         // list 1 does not contain all items in list 3
-        assertFalse(authoritiesList1.containsAll(authoritiesList3));
+        assertThat(authoritiesList1.containsAll(authoritiesList3)).isFalse();
 
         // list 1 does contain all items in list 2
-        assertTrue(authoritiesList1.containsAll(authoritiesList2));
+        assertThat(authoritiesList1).containsAll(authoritiesList2);
     }
 }

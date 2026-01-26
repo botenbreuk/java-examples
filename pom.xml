@@ -16,15 +16,16 @@
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <lombok.version>1.18.42</lombok.version>
         <gson.version>2.13.2</gson.version>
-        <jackson.version>3.0.2</jackson.version>
+        <jackson.version>3.0.4</jackson.version>
         <reflections.version>0.10.2</reflections.version>
 
-        <logback.version>1.5.21</logback.version>
+        <logback.version>1.5.26</logback.version>
         <slf4j.version>2.0.17</slf4j.version>
 
-        <junit.version>6.0.1</junit.version>
+        <junit.version>6.0.2</junit.version>
         <archunit.version>1.4.1</archunit.version>
-        <dependency-check-maven.version>12.1.9</dependency-check-maven.version>
+        <assertj.version>3.27.7</assertj.version>
+        <dependency-check-maven.version>12.2.0</dependency-check-maven.version>
     </properties>
 
     <dependencyManagement>
@@ -124,6 +125,12 @@
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit5</artifactId>
             <version>${archunit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

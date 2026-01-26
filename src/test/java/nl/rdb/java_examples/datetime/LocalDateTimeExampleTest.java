@@ -1,8 +1,6 @@
 package nl.rdb.java_examples.datetime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.lang.invoke.MethodHandles;
 import java.time.LocalDate;
@@ -22,16 +20,16 @@ class LocalDateTimeExampleTest {
     @Test
     void fomatTest() {
         LocalDateTimeExample example = new LocalDateTimeExample(LocalDateTime.of(2019, Month.DECEMBER, 31, 8, 15, 0));
-        assertEquals("2019-12-31 08:15:00", example.getOrdinaryYearFormat());
-        assertEquals("2020-12-31 08:15:00", example.getWeekBasedYearFormat());
+        assertThat(example.getOrdinaryYearFormat()).isEqualTo("2019-12-31 08:15:00");
+        assertThat(example.getWeekBasedYearFormat()).isEqualTo("2020-12-31 08:15:00");
     }
 
     @Test
     void testEquals() {
         LocalDateTime dateTime1 = LocalDateTime.of(2022, 11, 1, 10, 0);
         LocalDateTime dateTime2 = LocalDateTime.of(2022, 11, 1, 10, 0);
-        assertTrue(dateTime1.equals(dateTime2));
-        assertTrue(Objects.equals(dateTime1, dateTime2));
+        assertThat(dateTime1.equals(dateTime2)).isTrue();
+        assertThat(Objects.equals(dateTime1, dateTime2)).isTrue();
     }
 
     @Test
@@ -42,7 +40,7 @@ class LocalDateTimeExampleTest {
         String expected = "2020-11-02 12:00:00";
         String actual = example.getOrdinaryYearFormat();
 
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -53,7 +51,7 @@ class LocalDateTimeExampleTest {
         LocalDateTime expected = LocalDateTime.of(2020, Month.NOVEMBER, 2, 14, 10);
         LocalDateTime actual = example.parse(time, "dd-MM-yyyy HH:mm");
 
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -78,7 +76,7 @@ class LocalDateTimeExampleTest {
             startCheck = LocalDate.now().minusDays(12);
             endCheck = LocalDate.now().plusDays(5);
 
-            assertTrue(inSameDateInterval(LocalDate.now(), LocalDate.now()));
+            assertThat(inSameDateInterval(LocalDate.now(), LocalDate.now())).isTrue();
         }
 
         @Test
@@ -86,7 +84,7 @@ class LocalDateTimeExampleTest {
             startCheck = LocalDate.now().plusDays(1);
             endCheck = LocalDate.now().plusDays(5);
 
-            assertFalse(inSameDateInterval(LocalDate.now(), LocalDate.now()));
+            assertThat(inSameDateInterval(LocalDate.now(), LocalDate.now())).isFalse();
         }
 
         @Test
@@ -94,7 +92,7 @@ class LocalDateTimeExampleTest {
             startCheck = LocalDate.now().minusDays(12);
             endCheck = LocalDate.now().minusDays(1);
 
-            assertFalse(inSameDateInterval(LocalDate.now(), LocalDate.now()));
+            assertThat(inSameDateInterval(LocalDate.now(), LocalDate.now())).isFalse();
         }
 
         @Test
@@ -102,7 +100,7 @@ class LocalDateTimeExampleTest {
             startCheck = LocalDate.now().minusDays(12);
             endCheck = null;
 
-            assertTrue(inSameDateInterval(LocalDate.now(), LocalDate.now()));
+            assertThat(inSameDateInterval(LocalDate.now(), LocalDate.now())).isTrue();
         }
 
         @Test
@@ -110,7 +108,7 @@ class LocalDateTimeExampleTest {
             startCheck = LocalDate.now().minusDays(12);
             endCheck = LocalDate.now().plusDays(4);
 
-            assertTrue(inSameDateInterval(LocalDate.now(), null));
+            assertThat(inSameDateInterval(LocalDate.now(), null)).isTrue();
         }
 
         private boolean inSameDateInterval(LocalDate start1, LocalDate end1) {
@@ -152,7 +150,7 @@ class LocalDateTimeExampleTest {
             gStartCheck = LocalDate.now().minusDays(20);
             gEndCheck = LocalDate.now().plusDays(10);
 
-            assertTrue(inZGSameDateInterval(LocalDate.now(), LocalDate.now()) && inGSameDateInterval(LocalDate.now(), LocalDate.now()));
+            assertThat(inZGSameDateInterval(LocalDate.now(), LocalDate.now()) && inGSameDateInterval(LocalDate.now(), LocalDate.now())).isTrue();
         }
 
         @Test
@@ -163,7 +161,7 @@ class LocalDateTimeExampleTest {
             gStartCheck = LocalDate.now().minusDays(20);
             gEndCheck = LocalDate.now().minusDays(10);
 
-            assertFalse(inZGSameDateInterval(LocalDate.now(), LocalDate.now()) && inGSameDateInterval(LocalDate.now(), LocalDate.now()));
+            assertThat(inZGSameDateInterval(LocalDate.now(), LocalDate.now()) && inGSameDateInterval(LocalDate.now(), LocalDate.now())).isFalse();
         }
 
         @Test
@@ -174,7 +172,7 @@ class LocalDateTimeExampleTest {
             gStartCheck = LocalDate.now().minusDays(20);
             gEndCheck = LocalDate.now().plusDays(10);
 
-            assertFalse(inZGSameDateInterval(LocalDate.now(), LocalDate.now()) && inGSameDateInterval(LocalDate.now(), LocalDate.now()));
+            assertThat(inZGSameDateInterval(LocalDate.now(), LocalDate.now()) && inGSameDateInterval(LocalDate.now(), LocalDate.now())).isFalse();
         }
 
         @Test
@@ -185,7 +183,7 @@ class LocalDateTimeExampleTest {
             gStartCheck = LocalDate.now().minusDays(20);
             gEndCheck = null;
 
-            assertFalse(inZGSameDateInterval(LocalDate.now(), LocalDate.now()) && inGSameDateInterval(LocalDate.now(), LocalDate.now()));
+            assertThat(inZGSameDateInterval(LocalDate.now(), LocalDate.now()) && inGSameDateInterval(LocalDate.now(), LocalDate.now())).isFalse();
         }
 
         private boolean inZGSameDateInterval(LocalDate start1, LocalDate end1) {
@@ -239,7 +237,7 @@ class LocalDateTimeExampleTest {
             gStartCheck = LocalDate.now().minusDays(20);
             gEndCheck = LocalDate.now().plusDays(10);
 
-            assertTrue(inZGSameDateInterval());
+            assertThat(inZGSameDateInterval()).isTrue();
         }
 
         @Test
@@ -250,7 +248,7 @@ class LocalDateTimeExampleTest {
             gStartCheck = LocalDate.now().minusDays(20);
             gEndCheck = LocalDate.now().plusDays(10);
 
-            assertTrue(inZGSameDateInterval());
+            assertThat(inZGSameDateInterval()).isTrue();
         }
 
         @Test
@@ -261,7 +259,7 @@ class LocalDateTimeExampleTest {
             gStartCheck = LocalDate.now().minusDays(20);
             gEndCheck = LocalDate.now();
 
-            assertTrue(inZGSameDateInterval());
+            assertThat(inZGSameDateInterval()).isTrue();
         }
 
         @Test
@@ -272,7 +270,7 @@ class LocalDateTimeExampleTest {
             gStartCheck = LocalDate.now().minusDays(20);
             gEndCheck = LocalDate.now().minusDays(10);
 
-            assertFalse(inZGSameDateInterval());
+            assertThat(inZGSameDateInterval()).isFalse();
         }
 
         @Test
@@ -283,7 +281,7 @@ class LocalDateTimeExampleTest {
             gStartCheck = LocalDate.now().minusDays(20);
             gEndCheck = LocalDate.now().plusDays(10);
 
-            assertFalse(inZGSameDateInterval());
+            assertThat(inZGSameDateInterval()).isFalse();
         }
 
         @Test
@@ -294,7 +292,7 @@ class LocalDateTimeExampleTest {
             gStartCheck = LocalDate.now().minusDays(20);
             gEndCheck = null;
 
-            assertFalse(inZGSameDateInterval());
+            assertThat(inZGSameDateInterval()).isFalse();
         }
 
         private boolean inZGSameDateInterval() {

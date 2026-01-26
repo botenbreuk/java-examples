@@ -1,6 +1,6 @@
 package nl.rdb.java_examples.gson;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,17 +29,18 @@ public class GsonTest {
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
             String json = gson.toJson(person);
 
-            assertEquals("{\"naam\":\"Piet\",\"birthDay\":\"1993-01-01\"}", json);
+            assertThat(json).isEqualTo("{\"naam\":\"Piet\",\"birthDay\":\"1993-01-01\"}");
 
             Person toObject = gson.fromJson("{\"naam\":\"Piet\",\"birthDay\":\"1993-01-01\"}", Person.class);
-            assertEquals(toObject.getNaam(), person.getNaam());
-            assertEquals(toObject.getBirthDay(), person.getBirthDay());
+            assertThat(person.getNaam()).isEqualTo(toObject.getNaam());
+            assertThat(person.getBirthDay()).isEqualTo(toObject.getBirthDay());
         }
 
         @Getter
         @Setter
         @AllArgsConstructor
         private static class Person {
+
             private String naam;
             private LocalDate birthDay;
         }
@@ -56,17 +57,18 @@ public class GsonTest {
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).create();
             String json = gson.toJson(person);
 
-            assertEquals("{\"naam\":\"Piet\",\"birthDay\":\"1993-01-01 14:11:00\"}", json);
+            assertThat(json).isEqualTo("{\"naam\":\"Piet\",\"birthDay\":\"1993-01-01 14:11:00\"}");
 
             Person toObject = gson.fromJson("{\"naam\":\"Piet\",\"birthDay\":\"1993-01-01 14:11:00\"}", Person.class);
-            assertEquals(toObject.getNaam(), person.getNaam());
-            assertEquals(toObject.getBirthDay(), person.getBirthDay());
+            assertThat(person.getNaam()).isEqualTo(toObject.getNaam());
+            assertThat(person.getBirthDay()).isEqualTo(toObject.getBirthDay());
         }
 
         @Getter
         @Setter
         @AllArgsConstructor
         private static class Person {
+
             private String naam;
             private LocalDateTime birthDay;
         }
