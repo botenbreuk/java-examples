@@ -33,7 +33,6 @@ jobs:
           OSS_PASS: ${{ secrets.OSS_API_KEY }}
         run: mvn --batch-mode dependency-check:check
           -DnvdApiKey=$API_KEY
-          -DossIndexServerId=ossindex
           -DossIndexUsername=$OSS_USER
           -DossIndexPassword=$OSS_PASS
       - name: Build with Maven
