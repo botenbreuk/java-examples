@@ -9,7 +9,10 @@
     <version>1.0.0</version>
 
     <properties>
-        <maven.compiler.release>25</maven.compiler.release>
+        <java.version>25</java.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <google-guava.version>33.6.0-jre</google-guava.version>
         <commons-collections4.version>4.5.0</commons-collections4.version>
@@ -19,10 +22,10 @@
         <jackson.version>3.2.0</jackson.version>
         <reflections.version>0.10.2</reflections.version>
 
-        <logback.version>1.5.34</logback.version>
+        <logback.version>1.6.0</logback.version>
         <slf4j.version>2.0.18</slf4j.version>
 
-        <junit.version>6.0.2</junit.version>
+        <junit.version>6.1.2</junit.version>
         <archunit.version>1.4.2</archunit.version>
         <assertj.version>3.27.7</assertj.version>
         <dependency-check-maven.version>12.2.2</dependency-check-maven.version>
@@ -140,7 +143,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.14.1</version>
+                <version>3.15.0</version>
                 <configuration>
                     <release>${maven.compiler.release}</release>
                     <annotationProcessorPaths>
@@ -156,7 +159,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.5.4</version>
+                <version>3.5.6</version>
             </plugin>
 
             <plugin>
@@ -175,7 +178,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.14</version>
+                <version>0.8.15</version>
                 <executions>
                     <execution>
                         <goals>
