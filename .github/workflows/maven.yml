@@ -35,6 +35,7 @@ jobs:
           -DnvdApiKey=$API_KEY
           -DossIndexUsername=$OSS_USER
           -DossIndexPassword=$OSS_PASS
+          -DnvdDatafeedUrl=https://dependency-check.github.io/DependencyCheck_Builder/nvd_cache/
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
       - name: Code coverage with Codecov
