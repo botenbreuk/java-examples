@@ -20,6 +20,7 @@
         <lombok.version>1.18.48</lombok.version>
         <gson.version>2.15.0</gson.version>
         <jackson.version>3.3.0</jackson.version>
+        <java-uuid-generator.version>5.2.0</java-uuid-generator.version>
         <reflections.version>0.10.2</reflections.version>
 
         <logback.version>1.6.7</logback.version>
@@ -84,6 +85,11 @@
         <dependency>
             <groupId>tools.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.uuid</groupId>
+            <artifactId>java-uuid-generator</artifactId>
+            <version>${java-uuid-generator.version}</version>
         </dependency>
         <dependency>
             <groupId>org.reflections</groupId>
